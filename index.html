@@ -8,14 +8,25 @@
 </head>
 <body>
   <header>
-    <h1>Entrenamientos de Hoy</h1>
+    <h1>Plan de Entrenamientos Semanal</h1>
   </header>
 
   <main>
-    <section id="entrenamientos">
-      <!-- Aquí se mostrarán los entrenamientos del día -->
+    <section id="seleccion-dia">
+      <label for="dias">Selecciona un día:</label>
+      <select id="dias" onchange="cargarEntrenamientos()">
+        <option value="lunes">Lunes y Jueves - Pecho + Tríceps + Abdomen</option>
+        <option value="martes">Martes y Viernes - Espalda + Bíceps + Abdomen</option>
+        <option value="miercoles">Miércoles - Hombros + Trapecio + Abdomen</option>
+        <option value="domingo">Domingo - Pierna en Casa</option>
+        <option value="sabado">Sábado - Libre</option>
+      </select>
     </section>
-    
+
+    <section id="entrenamientos">
+      <!-- Aquí se mostrarán los entrenamientos seleccionados -->
+    </section>
+
     <div id="resumen">
       <h2>Resumen</h2>
       <p id="tiempo-total">Tiempo Total: 0 minutos</p>
