@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6200ea">
   <title>Entrenamiento Diario</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-container">
-    <header>
-      <h1>Entrenamiento Diario</h1>
-    </header>
+  <header>
+    <h1>Entrenamientos de Hoy</h1>
+  </header>
 
-    <main>
-      <section id="entrenamiento">
-        <h2>Entrenamiento de Hoy</h2>
-        <div id="dias" class="dias-entrenamiento"></div>
-        <button id="finalizar-dia">Finalizar Día</button>
-      </section>
-    </main>
+  <main>
+    <section id="entrenamientos">
+      <!-- Aquí se mostrarán los entrenamientos del día -->
+    </section>
+    
+    <div id="resumen">
+      <h2>Resumen</h2>
+      <p id="tiempo-total">Tiempo Total: 0 minutos</p>
+    </div>
+  </main>
 
-    <footer>
-      <p>&copy; 2025 Mi Aplicación de Entrenamiento</p>
-    </footer>
-  </div>
+  <footer>
+    <button id="reset">Restablecer</button>
+  </footer>
 
   <script src="app.js"></script>
 </body>
