@@ -7,14 +7,15 @@ body {
 }
 
 .container {
-  width: 80%;
+  width: 90%;
+  max-width: 1200px; /* Limita el tamaño máximo en pantallas grandes */
   margin: 0 auto;
   text-align: center;
 }
 
 h1 {
   color: #2c3e50;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
@@ -31,7 +32,8 @@ select {
   margin-bottom: 20px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  width: 200px;
+  width: 100%; /* Permite que el selector ocupe todo el ancho disponible */
+  max-width: 300px; /* Limita el ancho del select en pantallas grandes */
 }
 
 button {
@@ -43,6 +45,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%; /* Hace que el botón ocupe todo el ancho disponible en móviles */
+  max-width: 300px; /* Limita el ancho en pantallas grandes */
 }
 
 button:disabled {
@@ -68,6 +72,7 @@ button:hover {
 #entrenamientos {
   margin-top: 20px;
   text-align: left;
+  padding: 0 20px; /* Añade espacio lateral */
 }
 
 .entrenamiento {
@@ -91,4 +96,44 @@ button:hover {
 
 .checkbox input {
   margin-right: 10px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .container {
+      width: 95%;
+      margin: 0 10px;
+  }
+
+  h1 {
+      font-size: 1.8rem;
+  }
+
+  select, button {
+      font-size: 1rem;
+      width: 100%;
+  }
+
+  #tiempo-entrenamiento, #tiempo-total {
+      font-size: 1rem;
+  }
+
+  .entrenamiento h3 {
+      font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 1.5rem;
+  }
+
+  .entrenamiento h3 {
+      font-size: 1rem;
+  }
+
+  select, button {
+      font-size: 1rem;
+      padding: 10px;
+  }
 }
