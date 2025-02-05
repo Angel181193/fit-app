@@ -36,30 +36,6 @@ const entrenamientos = {
     { nombre: "🔥 Planchas laterales", grupo: "Abdomen", series: 3, reps: "30-45 seg", tiempo: 5 },
     { nombre: "🚀 Cardio final: Cinta o HIIT", grupo: "-", series: "-", reps: "-", tiempo: 5 }
   ],
-  jueves: [
-    { nombre: "🏃‍♂️ Calentamiento en cinta", grupo: "-", series: "-", reps: "-", tiempo: 5 },
-    { nombre: "🔥 Press inclinado con mancuernas", grupo: "Pecho", series: 5, reps: "8-12", tiempo: 12 },
-    { nombre: "🔥 Aperturas con mancuernas", grupo: "Pecho", series: 4, reps: "10-12", tiempo: 8 },
-    { nombre: "🔥 Press plano con mancuernas", grupo: "Pecho", series: 4, reps: "10-12", tiempo: 8 },
-    { nombre: "🔥 Fondos en banco (con peso en piernas)", grupo: "Tríceps", series: 4, reps: "12-15", tiempo: 8 },
-    { nombre: "🔥 Extensión de tríceps en polea", grupo: "Tríceps", series: 4, reps: "12-15", tiempo: 8 },
-    { nombre: "🔥 Patada de tríceps con mancuerna", grupo: "Tríceps", series: 3, reps: "15", tiempo: 6 },
-    { nombre: "🔥 Crunch en polea", grupo: "Abdomen", series: 4, reps: "12-15", tiempo: 7 },
-    { nombre: "🔥 Planchas con peso", grupo: "Abdomen", series: 3, reps: "30-45 seg", tiempo: 5 },
-    { nombre: "🚀 Cardio final: Cinta o HIIT", grupo: "-", series: "-", reps: "-", tiempo: 5 }
-  ],
-    viernes: [
-      { nombre: "🏃‍♂️ Calentamiento en cinta", grupo: "-", series: "-", reps: "-", tiempo: 5 },
-      { nombre: "🔥 Remo con mancuerna", grupo: "Espalda", series: 5, reps: "8-12", tiempo: 12 },
-      { nombre: "🔥 Jalón al pecho en polea", grupo: "Espalda", series: 4, reps: "10-12", tiempo: 8 },
-      { nombre: "🔥 Pullover con mancuerna", grupo: "Espalda", series: 4, reps: "12-15", tiempo: 8 },
-      { nombre: "🔥 Curl con barra Z o mancuernas", grupo: "Bíceps", series: 4, reps: "10-12", tiempo: 8 },
-      { nombre: "🔥 Curl martillo con mancuernas", grupo: "Bíceps", series: 4, reps: "10-12", tiempo: 8 },
-      { nombre: "🔥 Curl concentrado con mancuerna", grupo: "Bíceps", series: 3, reps: "12-15", tiempo: 6 },
-      { nombre: "🔥 Elevación de piernas colgado o en banco", grupo: "Abdomen", series: 4, reps: "12-15", tiempo: 7 },
-      { nombre: "🔥 Russian Twists con mancuerna", grupo: "Abdomen", series: 3, reps: "15-20", tiempo: 5 },
-      { nombre: "🚀 Cardio final: Cinta o HIIT", grupo: "-", series: "-", reps: "-", tiempo: 5 }
-    ],
   domingo: [
     { nombre: "🏃‍♂️ Calentamiento (sentadillas + estocadas dinámicas)", grupo: "-", series: "-", reps: "-", tiempo: 5 },
     { nombre: "🔥 Sentadillas con mancuernas", grupo: "Piernas", series: 5, reps: "12-15", tiempo: 12 },
@@ -100,7 +76,7 @@ function cargarEntrenamientos() {
 }
 
 // Inicialización de los entrenamientos
-cargarEntrenamientos();
+document.addEventListener('DOMContentLoaded', cargarEntrenamientos);
 
 // Restablecer selección
 document.getElementById("reset").addEventListener("click", () => {
