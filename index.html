@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrenamiento Diario</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento</title>
+    <link rel="stylesheet" href="style.css"> <!-- Si usas un archivo CSS separado -->
 </head>
 <body>
-  <header>
-    <h1>Plan de Entrenamientos Semanal</h1>
-  </header>
-
-  <main>
-    <section id="seleccion-dia">
-      <label for="dias">Selecciona un día:</label>
-      <select id="dias" onchange="cargarEntrenamientos()">
-        <option value="lunes">Lunes- Pecho + Tríceps + Abdomen</option>
-        <option value="martes">Martes - Espalda + Bíceps + Abdomen</option>
-        <option value="miercoles">Miércoles - Hombros + Trapecio + Abdomen</option>
-        <option value="Jueves">Jueves- Pecho + Tríceps + Abdomen</option>
-        <option value="Viernes">Viernes - Espalda + Bíceps + Abdomen</option>
-        <option value="domingo">Domingo - Pierna en Casa</option>
-        <option value="sabado">Sábado - Libre</option>
-      </select>
-    </section>
-
-    <section id="entrenamientos">
-      <!-- Aquí se mostrarán los entrenamientos seleccionados -->
-    </section>
-
-    <div id="resumen">
-      <h2>Resumen</h2>
-      <p id="tiempo-total">Tiempo Total: 0 minutos</p>
+    <div class="container">
+        <h1>Plan de Entrenamiento</h1>
+        <div>
+            <label for="dias">Selecciona el día:</label>
+            <select id="dias">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="domingo">Domingo</option>
+            </select>
+        </div>
+        <button id="iniciar-entrenamiento" class="btn">Iniciar Entrenamiento</button>
+        <div id="tiempo-entrenamiento"></div>
+        <div id="entrenamientos"></div>
+        <div id="tiempo-total"></div>
     </div>
-  </main>
 
-  <footer>
-    <button id="reset">Restablecer</button>
-  </footer>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
