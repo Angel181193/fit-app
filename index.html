@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App de Entrenamiento</title>
+  <meta name="theme-color" content="#6200ea">
+  <title>Entrenamiento Diario</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <header>
-    <h1>Entrenamiento Diario</h1>
-  </header>
+  <div class="app-container">
+    <header>
+      <h1>Entrenamiento Diario</h1>
+    </header>
 
-  <main id="main-content">
-    <!-- Aquí se cargarán los ejercicios del día -->
-  </main>
+    <main>
+      <section id="entrenamiento">
+        <h2>Entrenamiento de Hoy</h2>
+        <div id="dias" class="dias-entrenamiento"></div>
+        <button id="finalizar-dia">Finalizar Día</button>
+      </section>
+    </main>
 
-  <div id="summary" class="hidden">
-    <h2>Resumen del Entrenamiento</h2>
-    <p id="total-time"></p>
-    <button onclick="restartWorkout()">Reiniciar entrenamiento</button>
+    <footer>
+      <p>&copy; 2025 Mi Aplicación de Entrenamiento</p>
+    </footer>
   </div>
 
   <script src="app.js"></script>
-  <script src="service-worker.js"></script>
 </body>
 </html>

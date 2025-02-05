@@ -1,15 +1,20 @@
 {
-  "name": "App de Entrenamiento",
+  "name": "Aplicación de Entrenamiento",
   "short_name": "Entrenamiento",
-  "description": "Tu rutina de entrenamiento personalizada.",
-  "start_url": "/",
+  "description": "La aplicación de entrenamiento diaria",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "theme_color": "#6200ea",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]

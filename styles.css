@@ -1,55 +1,82 @@
+/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #f4f4f9;
+}
+
+h1 {
+  text-align: center;
+  color: #6200ea;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header {
-  background-color: #333;
-  color: white;
-  padding: 10px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-main {
-  padding: 20px;
+footer {
+  text-align: center;
+  margin-top: 20px;
 }
 
 button {
+  display: block;
+  width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #6200ea;
   color: white;
   border: none;
-  cursor: pointer;
-  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #3700b3;
 }
 
-.hidden {
-  display: none;
+/* Estilos para las secciones de entrenamiento */
+#entrenamiento h2 {
+  color: #6200ea;
 }
 
-.exercise-list {
-  list-style-type: none;
-  padding: 0;
+.dias-entrenamiento {
+  margin-top: 20px;
 }
 
-.exercise-item {
-  margin: 15px 0;
+.dia {
+  background-color: #e1bee7;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.exercise-item input[type="checkbox"] {
-  margin-right: 10px;
+.dia h3 {
+  margin: 0;
+  color: #6200ea;
 }
 
-#summary {
-  padding: 20px;
-  background-color: #fff;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.ejercicio {
+  margin: 5px 0;
+}
+
+.ejercicio button {
+  margin-left: 10px;
+  background-color: #388e3c;
+}
+
+.ejercicio button:hover {
+  background-color: #2c6b28;
 }

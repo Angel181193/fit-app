@@ -1,62 +1,74 @@
-// Lista de ejercicios para cada día de la semana
-const workouts = {
-  lunes: [
-    { name: "🏃‍♂️ Calentamiento en cinta", group: "-", series: "-", reps: "-", time: 5 },
-    { name: "🔥 Press inclinado con mancuernas", group: "Pecho", series: 5, reps: "8-12", time: 12 },
-    { name: "🔥 Aperturas con mancuernas", group: "Pecho", series: 4, reps: "10-12", time: 8 },
-    // ... Agrega más ejercicios aquí
-  ],
-  // Agregar entrenamientos para los otros días de la semana
-};
+document.addEventListener('DOMContentLoaded', function () {
+  const diasEntrenamiento = [
+    { nombre: "Lunes", ejercicios: [
+        { nombre: "Calentamiento en cinta", grupoMuscular: "-", series: "-", reps: "-", tiempo: "5 min", completado: false },
+        { nombre: "Press inclinado con mancuernas", grupoMuscular: "Pecho", series: 5, reps: "8-12", tiempo: "12 min", completado: false },
+        { nombre: "Aperturas con mancuernas", grupoMuscular: "Pecho", series: 4, reps: "10-12", tiempo: "8 min", completado: false },
+        // Agrega el resto de ejercicios
+      ]
+    },
+    { nombre: "Martes", ejercicios: [
+        { nombre: "Calentamiento en cinta", grupoMuscular: "-", series: "-", reps: "-", tiempo: "5 min", completado: false },
+        { nombre: "Remo con mancuerna", grupoMuscular: "Espalda", series: 5, reps: "8-12", tiempo: "12 min", completado: false },
+        // Agrega el resto de ejercicios
+      ]
+    },
+    // Agrega los días restantes
+  ];
 
-const today = new Date().toLocaleString('es-ES', { weekday: 'long' }).toLowerCase();
-const workoutForToday = workouts[today];
+  const diasElement = document.getElementById('dias');
+  const finalizarDiaButton = document.getElementById('finalizar-dia');
 
-let totalTime = 0;
-
-function loadWorkout() {
-  const mainContent = document.getElementById('main-content');
-  mainContent.innerHTML = "";
-
-  workoutForToday.forEach(exercise => {
-    const li = document.createElement('li');
-    li.classList.add('exercise-item');
-
-    li.innerHTML = `
-      <input type="checkbox" class="exercise-checkbox" data-time="${exercise.time}">
-      <span>${exercise.name} (${exercise.time} min)</span>
-    `;
-
-    mainContent.appendChild(li);
-  });
-
-  document.querySelectorAll('.exercise-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', updateTotalTime);
-  });
-}
-
-function updateTotalTime() {
-  totalTime = 0;
-  const checkboxes = document.querySelectorAll('.exercise-checkbox:checked');
-  checkboxes.forEach(checkbox => {
-    totalTime += parseInt(checkbox.getAttribute('data-time'));
-  });
-
-  if (checkboxes.length === workoutForToday.length) {
-    showSummary();
+  // Generar los ejercicios en la interfaz
+  function renderizarEjercicios(dia) {
+    return dia.ejercicios.map(ejercicio => {
+      return `
+        <div class="ejercicio">
+          <h4>${ejercicio.nombre} (${ejercicio.grupoMuscular})</h4>
+          <p>Series: ${ejercicio.series}, Reps: ${ejercicio.reps}, Tiempo: ${ejercicio.tiempo}</p>
+          <button onclick="marcarEjercicio('${ejercicio.nombre}')">${ejercicio.completado ? 'Completado' : 'Marcar como Completado'}</button>
+        </div>
+      `;
+    }).join('');
   }
-}
 
-function showSummary() {
-  document.getElementById('total-time').textContent = `Tiempo total de entrenamiento: ${totalTime} min`;
-  document.getElementById('summary').classList.remove('hidden');
-}
+  // Función para marcar un ejercicio como completado
+  function marcarEjercicio(nombre) {
+    diasEntrenamiento.forEach(dia => {
+      dia.ejercicios.forEach(ejercicio => {
+        if (ejercicio.nombre === nombre) {
+          ejercicio.completado = !ejercicio.completado;
+        }
+      });
+    });
+    renderizar();
+  }
 
-function restartWorkout() {
-  totalTime = 0;
-  loadWorkout();
-  document.getElementById('summary').classList.add('hidden');
-}
+  // Función para renderizar la vista actual
+  function renderizar() {
+    diasElement.innerHTML = diasEntrenamiento.map(dia => {
+      return `
+        <div class="dia">
+          <h3>${dia.nombre}</h3>
+          ${renderizarEjercicios(dia)}
+        </div>
+      `;
+    }).join('');
+  }
 
-// Cargar el entrenamiento del día al iniciar
-loadWorkout();
+  // Finalizar día y mostrar resumen
+  finalizarDiaButton.addEventListener('click', function() {
+    const tiempoTotal = diasEntrenamiento.reduce((total, dia) => {
+      dia.ejercicios.forEach(ejercicio => {
+        if (ejercicio.completado) {
+          const tiempo = parseInt(ejercicio.tiempo);
+          if (!isNaN(tiempo)) total += tiempo;
+        }
+      });
+      return total;
+    }, 0);
+    alert(`¡Has completado el día! Tiempo total de entrenamiento: ${tiempoTotal} minutos.`);
+  });
+
+  renderizar();
+});
