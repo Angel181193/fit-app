@@ -3,25 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento</title>
-    <link rel="stylesheet" href="style.css"> <!-- Si usas un archivo CSS separado -->
+    <title>Mi App de Entrenamiento</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Plan de Entrenamiento</h1>
-        <div>
-            <label for="dias">Selecciona el día:</label>
-            <select id="dias">
-                <option value="lunes">Lunes</option>
-                <option value="martes">Martes</option>
-                <option value="miercoles">Miércoles</option>
-                <option value="domingo">Domingo</option>
-            </select>
+        <h1>Entrenamiento Diario</h1>
+
+        <!-- Selector de día -->
+        <label for="dia-selector">Selecciona un día:</label>
+        <select id="dia-selector">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+
+        <!-- Botón de inicio de entrenamiento -->
+        <button id="iniciar-entrenamiento" onclick="iniciarEntrenamiento()">Iniciar Entrenamiento</button>
+
+        <!-- Mostrar tiempo de entrenamiento -->
+        <div id="tiempo-entrenamiento">
+            Tiempo: <span id="tiempo">00:00</span>
         </div>
-        <button id="iniciar-entrenamiento" class="btn">Iniciar Entrenamiento</button>
-        <div id="tiempo-entrenamiento"></div>
+
+        <!-- Lista de ejercicios (se actualizará según el día seleccionado) -->
         <div id="entrenamientos"></div>
-        <div id="tiempo-total"></div>
+
+        <!-- Tiempo total de entrenamiento -->
+        <div id="tiempo-total">Tiempo Total: 0 min</div>
     </div>
 
     <script src="app.js"></script>
