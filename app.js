@@ -4,7 +4,7 @@ const workouts = {
     { name: "🏃‍♂️ Calentamiento en cinta", group: "-", series: "-", reps: "-", time: 5 },
     { name: "🔥 Press inclinado con mancuernas", group: "Pecho", series: 5, reps: "8-12", time: 12 },
     { name: "🔥 Aperturas con mancuernas", group: "Pecho", series: 4, reps: "10-12", time: 8 },
-    // ... (agregar el resto de ejercicios)
+    // ... Agrega más ejercicios aquí
   ],
   // Agregar entrenamientos para los otros días de la semana
 };
