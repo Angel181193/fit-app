@@ -1,11 +1,11 @@
 const ejerciciosPorDia = {
   lunes: [
-      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 0 },
-      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 0 }
+      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 4, realizadas: 0 },
+      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 3, realizadas: 0 }
   ],
   martes: [
-      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 0 },
-      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 0 }
+      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
+      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 3, realizadas: 0 }
   ]
 };
 
@@ -28,10 +28,12 @@ function actualizarListaEjercicios() {
       li.classList.add("ejercicio-item");
       li.innerHTML = `
           <input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()">
-          <span class="nombre-ejercicio">${ejercicio.nombre} <small>(${ejercicio.grupo})</small></span>
+          <span class="nombre-ejercicio">${ejercicio.nombre}</span>
+          <span class="grupo">${ejercicio.grupo}</span>
+          <span class="series">${ejercicio.series}</span>
           <span class="series-tracker">
               <button onclick="restarSerie(${index})">-</button>
-              <span id="series-${index}">${ejercicio.series}</span>
+              <span id="series-${index}">${ejercicio.realizadas}</span>
               <button onclick="sumarSerie(${index})">+</button>
           </span>
       `;

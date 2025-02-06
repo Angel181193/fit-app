@@ -50,8 +50,8 @@ button:hover {
 }
 
 .header-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 10% 30% 20% 15% 25%;
   background-color: #444;
   padding: 10px;
   font-weight: bold;
@@ -63,8 +63,8 @@ ul {
 }
 
 .ejercicio-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 10% 30% 20% 15% 25%;
   align-items: center;
   background-color: #333;
   padding: 10px;
@@ -76,16 +76,10 @@ ul {
   margin-right: 10px;
 }
 
-.nombre-ejercicio {
-  flex: 1;
-  text-align: left;
-}
-
 .series-tracker {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
 }
 
 .series-tracker button {
