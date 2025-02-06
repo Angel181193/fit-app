@@ -45,36 +45,55 @@ button:hover {
   margin-top: 10px;
 }
 
+.ejercicios-container {
+  margin-top: 20px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  background-color: #444;
+  padding: 10px;
+  font-weight: bold;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  background-color: #444;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
+.ejercicio-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #333;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
 .checkbox {
   margin-right: 10px;
 }
 
+.nombre-ejercicio {
+  flex: 1;
+  text-align: left;
+}
+
 .series-tracker {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100px;
 }
 
 .series-tracker button {
   background-color: #666;
   border: none;
   padding: 5px;
-  margin: 0 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .series-tracker button:hover {

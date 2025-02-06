@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rutina de Entrenamiento</title>
+    <title>Entrenamiento</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Mi Rutina de Entrenamiento</h1>
-        
+        <h1>Mi Rutina</h1>
         <label for="select-dia">Selecciona el día:</label>
         <select id="select-dia">
             <option value="lunes">Lunes</option>
             <option value="martes">Martes</option>
             <option value="miercoles">Miércoles</option>
-            <option value="jueves">Jueves</option>
-            <option value="viernes">Viernes</option>
-            <option value="domingo">Domingo</option>
         </select>
-
         <button id="start-workout">Iniciar Entrenamiento</button>
         <div id="timer">Tiempo: 00:00</div>
 
-        <ul id="ejercicios-lista"></ul>
+        <div class="ejercicios-container">
+            <div class="header-row">
+                <span>✔️</span>
+                <span>Ejercicio</span>
+                <span>Series / Reps</span>
+            </div>
+            <ul id="ejercicios-lista"></ul>
+        </div>
+
+        <button id="finish-workout" style="display:none;">Finalizar Entrenamiento</button>
     </div>
 
     <script src="app.js"></script>
