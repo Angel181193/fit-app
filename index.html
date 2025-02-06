@@ -3,38 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi App de Entrenamiento</title>
+    <title>Rutina de Entrenamiento</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Entrenamiento Diario</h1>
-
-        <!-- Selector de día -->
-        <label for="dia-selector">Selecciona un día:</label>
-        <select id="dia-selector">
+        <h1>Mi Rutina de Entrenamiento</h1>
+        
+        <label for="select-dia">Selecciona el día:</label>
+        <select id="select-dia">
             <option value="lunes">Lunes</option>
             <option value="martes">Martes</option>
             <option value="miercoles">Miércoles</option>
             <option value="jueves">Jueves</option>
             <option value="viernes">Viernes</option>
-            <option value="sabado">Sábado</option>
             <option value="domingo">Domingo</option>
         </select>
 
-        <!-- Botón de inicio de entrenamiento -->
-        <button id="iniciar-entrenamiento" onclick="iniciarEntrenamiento()">Iniciar Entrenamiento</button>
+        <button id="start-workout">Iniciar Entrenamiento</button>
+        <div id="timer">Tiempo: 00:00</div>
 
-        <!-- Mostrar tiempo de entrenamiento -->
-        <div id="tiempo-entrenamiento">
-            Tiempo: <span id="tiempo">00:00</span>
-        </div>
-
-        <!-- Lista de ejercicios (se actualizará según el día seleccionado) -->
-        <div id="entrenamientos"></div>
-
-        <!-- Tiempo total de entrenamiento -->
-        <div id="tiempo-total">Tiempo Total: 0 min</div>
+        <ul id="ejercicios-lista"></ul>
     </div>
 
     <script src="app.js"></script>
