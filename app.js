@@ -1,11 +1,11 @@
 const ejerciciosPorDia = {
   lunes: [
-      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 0, reps: "8-12" },
-      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 0, reps: "10-12" }
+      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 0 },
+      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 0 }
   ],
   martes: [
-      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 0, reps: "8-12" },
-      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 0, reps: "10-12" }
+      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 0 },
+      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 0 }
   ]
 };
 
@@ -31,7 +31,7 @@ function actualizarListaEjercicios() {
           <span class="nombre-ejercicio">${ejercicio.nombre} <small>(${ejercicio.grupo})</small></span>
           <span class="series-tracker">
               <button onclick="restarSerie(${index})">-</button>
-              <span id="series-${index}">${ejercicio.series}</span>/${ejercicio.reps}
+              <span id="series-${index}">${ejercicio.series}</span>
               <button onclick="sumarSerie(${index})">+</button>
           </span>
       `;

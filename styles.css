@@ -84,8 +84,8 @@ ul {
 .series-tracker {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100px;
+  justify-content: center;
+  width: 80px;
 }
 
 .series-tracker button {
