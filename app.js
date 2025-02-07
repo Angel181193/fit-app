@@ -8,11 +8,12 @@ const ejerciciosPorDia = {
       { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 3, realizadas: 0 }
   ],
   miercoles: [
-      { nombre: "Peso muerto", grupo: "Espalda", series: 4, realizadas: 0 },
-      { nombre: "Dominadas asistidas", grupo: "Espalda", series: 3, realizadas: 0 }
+      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
+      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 8, realizadas: 0 }
   ],
   jueves: [
-      { nombre: "Correr", grupo: "Cardio", series: 10, realizadas: 0 },
+      { nombre: "Correr", grupo: "HIT", series: 5, realizadas: 0 },
+      { nombre: "Remo en polea baja", grupo: "Espalda", series: 8, realizadas: 0 },
       { nombre: "Extensión de tríceps en polea", grupo: "Tríceps", series: 8, realizadas: 0 }
   ]
 };
@@ -32,20 +33,20 @@ function actualizarListaEjercicios() {
 
   listaEjercicios.innerHTML = "";
   ejercicios.forEach((ejercicio, index) => {
-      const li = document.createElement("li");
-      li.classList.add("ejercicio-item");
-      li.innerHTML = `
-          <input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()">
-          <span class="nombre-ejercicio">${ejercicio.nombre}</span>
-          <span class="grupo">${ejercicio.grupo}</span>
-          <span class="series">${ejercicio.series}</span>
-          <div class="series-tracker">
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+          <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
+          <td>${ejercicio.nombre}</td>
+          <td>${ejercicio.grupo}</td>
+          <td>${ejercicio.series}</td>
+          <td class="series-tracker">
               <button onclick="restarSerie(${index})">-</button>
               <span id="series-${index}">${ejercicio.realizadas}</span>
               <button onclick="sumarSerie(${index})">+</button>
-          </div>
+          </td>
       `;
-      listaEjercicios.appendChild(li);
+      listaEjercicios.appendChild(row);
   });
 
   verificarCompletados();

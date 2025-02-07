@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrenamiento</title>
+    <title>FitApp</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Mi Entrenamiento</h1>
-        <label for="select-dia">Selecciona el día:</label>
+        <h1>Mi Rutina de Entrenamiento</h1>
+        <label for="select-dia">Selecciona un día:</label>
         <select id="select-dia">
             <option value="lunes">Lunes</option>
             <option value="martes">Martes</option>
             <option value="miercoles">Miércoles</option>
             <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
         </select>
 
+        <table class="exercise-table">
+            <thead>
+                <tr>
+                    <th>✔</th>
+                    <th>Ejercicio</th>
+                    <th>Músculo</th>
+                    <th>Series</th>
+                    <th>Realizadas</th>
+                </tr>
+            </thead>
+            <tbody id="ejercicios-lista"></tbody>
+        </table>
+
         <button id="start-workout">Iniciar Entrenamiento</button>
+        <button id="finish-workout" style="display:none;">Finalizar Entrenamiento</button>
         <p id="timer">Tiempo: 00:00</p>
-
-        <ul id="ejercicios-lista"></ul>
-
-        <button id="finish-workout" style="display: none;">Finalizar Entrenamiento</button>
     </div>
 
     <script src="app.js"></script>
