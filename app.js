@@ -1,27 +1,22 @@
 const ejerciciosPorDia = {
-    lunes: [
-        { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 4, realizadas: 0 },
-        { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 3, realizadas: 0 }
-    ],
-    martes: [
-        { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
-        { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 3, realizadas: 0 }
-    ],
-    miércoles: [
-        { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
-        { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 8, realizadas: 0 }
-    ],
-    jueves: [
-        { nombre: "🔥 Correr", grupo: "HIT", series: 5, realizadas: 0 },
-        { nombre: "🔥 Remo en polea baja", grupo: "Espalda", series: 8, realizadas: 0 },
-        { nombre: "🔥 Remo en polea baja brazo", grupo: "Espalda", series: 5, realizadas: 0 },
-        { nombre: "🔥 Extensión de tríceps en polea", grupo: "Triceps", series: 8, realizadas: 0 },
-        { nombre: "🔥 Extensión de bíceps en polea", grupo: "Biceps", series: 8, realizadas: 0 },
-        { nombre: "🔥 Bíceps con mancuerna", grupo: "Biceps", series: 5, realizadas: 0 },
-        { nombre: "🔥 Press Francés", grupo: "Triceps", series: 5, realizadas: 0 },
-        { nombre: "🔥 Correr", grupo: "HIT", series: 10, realizadas: 0 }
-    ]
-  };  
+  lunes: [
+      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 4, realizadas: 0 },
+      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 3, realizadas: 0 }
+  ],
+  martes: [
+      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
+      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 3, realizadas: 0 }
+  ],
+  miercoles: [
+      { nombre: "Peso muerto", grupo: "Espalda", series: 4, realizadas: 0 },
+      { nombre: "Dominadas asistidas", grupo: "Espalda", series: 3, realizadas: 0 }
+  ],
+  jueves: [
+      { nombre: "Correr", grupo: "Cardio", series: 10, realizadas: 0 },
+      { nombre: "Extensión de tríceps en polea", grupo: "Tríceps", series: 8, realizadas: 0 }
+  ]
+};
+
 const selectDia = document.getElementById("select-dia");
 const listaEjercicios = document.getElementById("ejercicios-lista");
 const startWorkoutBtn = document.getElementById("start-workout");
@@ -44,11 +39,11 @@ function actualizarListaEjercicios() {
           <span class="nombre-ejercicio">${ejercicio.nombre}</span>
           <span class="grupo">${ejercicio.grupo}</span>
           <span class="series">${ejercicio.series}</span>
-          <span class="series-tracker">
+          <div class="series-tracker">
               <button onclick="restarSerie(${index})">-</button>
               <span id="series-${index}">${ejercicio.realizadas}</span>
               <button onclick="sumarSerie(${index})">+</button>
-          </span>
+          </div>
       `;
       listaEjercicios.appendChild(li);
   });

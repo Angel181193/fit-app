@@ -1,60 +1,49 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #1e1e1e;
-  color: white;
   text-align: center;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 
 .container {
-  max-width: 400px;
-  margin: auto;
-  background-color: #282828;
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  background: white;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   font-size: 24px;
-  margin-bottom: 20px;
-}
-
-select {
-  width: 100%;
-  padding: 10px;
   margin-bottom: 10px;
 }
 
-button {
-  background-color: #ff5722;
-  color: white;
+select, button {
+  width: 100%;
   padding: 10px;
+  margin: 10px 0;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
   cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
 }
 
 button:hover {
-  background-color: #e64a19;
+  background-color: #218838;
 }
 
 #timer {
   font-size: 18px;
-  margin-top: 10px;
-}
-
-.ejercicios-container {
-  margin-top: 20px;
-}
-
-.header-row {
-  display: grid;
-  grid-template-columns: 10% 30% 20% 15% 25%;
-  background-color: #444;
-  padding: 10px;
   font-weight: bold;
+  margin: 10px 0;
 }
 
 ul {
@@ -63,38 +52,48 @@ ul {
 }
 
 .ejercicio-item {
-  display: grid;
-  grid-template-columns: 10% 30% 20% 15% 25%;
+  display: flex;
   align-items: center;
-  background-color: #333;
+  justify-content: space-between;
+  background: #fff;
   padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
 }
 
-.checkbox {
+.ejercicio-item input[type="checkbox"] {
   margin-right: 10px;
 }
 
 .series-tracker {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .series-tracker button {
-  background-color: #666;
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 5px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .series-tracker button:hover {
-  background-color: #888;
+  background-color: #0056b3;
 }
 
-#finish-workout {
-  background-color: #4CAF50;
-  display: none;
+@media (max-width: 500px) {
+  .ejercicio-item {
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: left;
+  }
+
+  .series-tracker {
+      margin-top: 5px;
+  }
 }
