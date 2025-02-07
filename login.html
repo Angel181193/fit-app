@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GalletoFit - Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Bienvenido a GalletoFit</h1>
+    <form id="login-form">
+      <input type="text" id="usuario" placeholder="Usuario" required>
+      <input type="password" id="clave" placeholder="Clave" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p id="mensaje"></p>
+  </div>
+
+  <!-- Cargamos Tabletop.js desde un CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.4/src/tabletop.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
