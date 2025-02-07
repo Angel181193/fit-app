@@ -69,8 +69,14 @@ h1, h2 {
   width: 20%; /* Realizadas */
 }
 
-/* Columna 4 y 5 */
-.exercise-table td:nth-child(4), .exercise-table td:nth-child(5) {
+/* Columna de Series */
+.exercise-table td:nth-child(4) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-table td:nth-child(5) {
   display: flex;
   justify-content: center;
   align-items: center;
