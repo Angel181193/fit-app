@@ -48,26 +48,51 @@ h1, h2 {
   color: white;
 }
 
+/* Ajustes de flexbox para las filas */
+.exercise-table tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exercise-table td {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+}
+
+/* Columna de series */
+.series-column {
+  width: 100px;  /* Ajusta el tamaño si es necesario */
+}
+
+/* Columna de realizadas */
+.realizadas-column {
+  width: 150px;  /* Ajusta el tamaño si es necesario */
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* Ajustes para responsive */
 @media (max-width: 600px) {
   .exercise-table {
-    font-size: 14px;
+      font-size: 14px;
   }
 
   .exercise-table th, .exercise-table td {
-    padding: 8px;
-  }
-
-  .series-tracker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+      padding: 8px;
   }
 
   .series-tracker button {
-    padding: 4px 8px;
-    font-size: 12px;
+      padding: 6px 8px;
+      font-size: 14px;
+  }
+
+  #start-workout, #finish-workout {
+      width: 100%;
+      font-size: 16px;
   }
 }
 
@@ -118,17 +143,4 @@ h1, h2 {
   font-size: 18px;
   margin-top: 10px;
   color: #333;
-}
-
-/* Estilo de las filas de ejercicios con múltiples líneas */
-.exercise-table td {
-  vertical-align: middle;
-}
-
-.exercise-table .series-column {
-  width: 15%;
-}
-
-.exercise-table .realizadas-column {
-  width: 20%;
 }
