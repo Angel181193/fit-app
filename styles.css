@@ -35,7 +35,7 @@ h1, h2 {
   width: 100%;
   table-layout: fixed;   /* Fija el ancho de las columnas según lo asignado */
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 .exercise-table th,
@@ -55,7 +55,7 @@ h1, h2 {
 /* Anchos fijos para cada columna */
 .exercise-table th:nth-child(1),
 .exercise-table td:nth-child(1) {
-  width: 7%;  /* Checkbox */
+  width: 6%;  /* Checkbox */
 }
 
 .exercise-table th:nth-child(2),
@@ -70,12 +70,12 @@ h1, h2 {
 
 .exercise-table th:nth-child(4),
 .exercise-table td:nth-child(4) {
-  width: 19%;  /* Series */
+  width: 18%;  /* Series */
 }
 
 .exercise-table th:nth-child(5),
 .exercise-table td:nth-child(5) {
-  width: 24%;  /* Realizadas */
+  width: 26%;  /* Realizadas */
 }
 
 /* Contenedor de botones en la columna "Realizadas" */
