@@ -48,15 +48,37 @@ h1, h2 {
   color: white;
 }
 
-/* Ajuste para la columna de botones */
-.exercise-table td:last-child {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 8px;
+/* Ajustes para responsive */
+@media (max-width: 600px) {
+  .exercise-table {
+    font-size: 14px;
+  }
+
+  .exercise-table th, .exercise-table td {
+    padding: 8px;
+  }
+
+  .series-tracker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .series-tracker button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
 }
 
-/* Ajuste para los botones */
+/* Botones de control de series */
+.series-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 .series-tracker button {
   background: #007bff;
   color: white;
@@ -66,7 +88,6 @@ h1, h2 {
   cursor: pointer;
   border-radius: 4px;
   margin: 2px;
-  width: 30px; /* Limitar el ancho de los botones */
 }
 
 .series-tracker button:hover {
@@ -104,18 +125,32 @@ h1, h2 {
   .exercise-table {
     font-size: 14px;
   }
-  
+
   .exercise-table th, .exercise-table td {
     padding: 8px;
   }
 
   .series-tracker button {
-    padding: 4px 8px;
-    font-size: 12px;
-    width: 30px;
+    padding: 6px 8px;
+    font-size: 14px;
   }
 
   #start-workout, #finish-workout {
+    width: 100%;
     font-size: 16px;
   }
+}
+
+/* Ajustes para el desajuste de la columna de realizadas */
+.exercise-table td {
+  vertical-align: top; /* Alinea el contenido de las celdas desde la parte superior */
+}
+
+.exercise-table td:nth-child(2) {
+  word-wrap: break-word; /* Permite que las palabras se rompan si son demasiado largas */
+}
+
+.exercise-table td:nth-child(4) {
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido de la celda */
 }
