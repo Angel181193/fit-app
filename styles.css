@@ -1,14 +1,14 @@
+/* styles.css - Ajustes para que las columnas sean responsivas y las cabeceras se vean correctamente */
+
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
 }
 
 .container {
-  width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 20px auto;
   background: white;
   padding: 20px;
@@ -17,15 +17,14 @@ body {
 }
 
 h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  text-align: center;
 }
 
 select, button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
 }
@@ -40,60 +39,48 @@ button:hover {
   background-color: #218838;
 }
 
-#timer {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
+/* Estilos de la tabla */
+.ejercicios-container {
+  overflow-x: auto;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-.ejercicio-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
-}
-
-.ejercicio-item input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-.series-tracker {
-  display: flex;
-  align-items: center;
-}
-
-.series-tracker button {
-  width: 25px;
-  height: 25px;
-  margin: 0 5px;
+thead {
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
 }
 
-.series-tracker button:hover {
-  background-color: #0056b3;
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  white-space: nowrap;
 }
 
-@media (max-width: 500px) {
-  .ejercicio-item {
-      flex-wrap: wrap;
-      justify-content: center;
-      text-align: left;
+/* Ajuste para columnas */
+th:nth-child(1), td:nth-child(1) { width: 10%; }
+th:nth-child(2), td:nth-child(2) { width: 40%; text-align: left; }
+th:nth-child(3), td:nth-child(3) { width: 20%; }
+th:nth-child(4), td:nth-child(4) { width: 15%; }
+th:nth-child(5), td:nth-child(5) { width: 15%; }
+
+/* Responsividad */
+@media screen and (max-width: 600px) {
+  table {
+      font-size: 14px;
   }
-
-  .series-tracker {
-      margin-top: 5px;
+  th, td {
+      padding: 8px;
+  }
+  th:nth-child(2), td:nth-child(2) {
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
   }
 }
