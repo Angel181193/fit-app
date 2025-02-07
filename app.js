@@ -111,6 +111,11 @@ function actualizarListaEjercicios() {
           <button onclick="sumarSerie(${index})">+</button>
         </div>
       </td>
+      <td class="timer-column">
+        <span id="timer-${index}">00:00</span>
+        <button onclick="iniciarTemporizador(${index})">Iniciar</button>
+        <button onclick="detenerTemporizador(${index})">Detener</button>
+      </td>
     `;
     listaEjercicios.appendChild(row);
   });
@@ -142,19 +147,27 @@ function actualizarListaEjercicios() {
   verificarCompletados();
 }
 
-// Inicia el temporizador (solo si es el día actual)
-function iniciarEntrenamiento() {
-  if (selectDia.value !== diaActual) return;
-  clearInterval(timer);
-  seconds = 0;
-  timerDisplay.innerText = "Tiempo: 00:00";
+// Inicia el temporizador para un ejercicio específico
+function iniciarTemporizador(index) {
+  const timerElement = document.getElementById(`timer-${index}`);
+  let ejercicioTiempo = 0;
 
-  timer = setInterval(() => {
-    seconds++;
-    let min = Math.floor(seconds / 60);
-    let sec = seconds % 60;
-    timerDisplay.innerText = `Tiempo: ${min}:${sec < 10 ? "0" : ""}${sec}`;
+  const timerEjercicio = setInterval(() => {
+    ejercicioTiempo++;
+    let min = Math.floor(ejercicioTiempo / 60);
+    let sec = ejercicioTiempo % 60;
+    timerElement.innerText = `${min}:${sec < 10 ? "0" : ""}${sec}`;
   }, 1000);
+
+  // Guardamos el temporizador en el objeto ejercicio
+  ejerciciosPorDia[selectDia.value][index].timerId = timerEjercicio;
+}
+
+// Detiene el temporizador para un ejercicio específico
+function detenerTemporizador(index) {
+  const timerElement = document.getElementById(`timer-${index}`);
+  clearInterval(ejerciciosPorDia[selectDia.value][index].timerId);
+  timerElement.innerText += " (Detenido)";
 }
 
 // Finaliza el entrenamiento (solo si es el día actual)

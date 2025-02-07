@@ -146,3 +146,48 @@ h1, h2 {
       font-size: 16px;
   }
 }
+
+/* Estilos para el menú de navegación */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  background-color: #575757;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;  /* Color de fondo para el menú activo */
+}
+
+/* Ajuste para el contenido de la página debajo del menú */
+body {
+  padding-top: 60px;  /* Espacio para que no quede oculto debajo del menú */
+}
+
