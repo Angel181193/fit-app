@@ -16,7 +16,7 @@ body {
   border-radius: 8px;
 }
 
-h1, h2 {
+h1 {
   text-align: center;
 }
 
@@ -43,7 +43,7 @@ h1, h2 {
   border-bottom: 1px solid #ddd;
 }
 
-/* Aseguramos que las columnas tengan un ancho adecuado */
+/* Definimos el ancho de las columnas */
 .exercise-table th:nth-child(1),
 .exercise-table td:nth-child(1) {
   width: 10%; /* Checkbox */
@@ -69,7 +69,7 @@ h1, h2 {
   width: 20%; /* Realizadas */
 }
 
-/* Columna de Series */
+/* Flexbox para la columna de Series */
 .exercise-table td:nth-child(4) {
   display: flex;
   justify-content: center;
@@ -83,20 +83,11 @@ h1, h2 {
   gap: 5px;
 }
 
-.exercise-table th {
-  background-color: #007bff;
-  color: white;
-}
-
-.exercise-table td {
-  vertical-align: middle; /* Alinea el contenido verticalmente */
-}
-
 /* Columna de Series */
 .series-tracker {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 5px;
 }
 
@@ -114,6 +105,16 @@ h1, h2 {
 
 .series-tracker button:hover {
   background: #0056b3;
+}
+
+/* Colores de la tabla */
+.exercise-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.exercise-table td {
+  vertical-align: middle; /* Alinea el contenido verticalmente */
 }
 
 /* Botones principales */
