@@ -16,7 +16,7 @@ body {
   border-radius: 8px;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
 }
 
@@ -33,46 +33,65 @@ h1 {
 /* Tabla de ejercicios */
 .exercise-table {
   width: 100%;
+  table-layout: fixed;   /* Fija el ancho de las columnas según lo asignado */
   border-collapse: collapse;
-  table-layout: fixed; /* Para que respete los anchos asignados */
   margin-top: 20px;
 }
 
-.exercise-table th, 
+.exercise-table th,
 .exercise-table td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
   text-align: center;
-  vertical-align: top;       /* Alinea el contenido al inicio (top) */
-  word-wrap: break-word;
+  word-wrap: break-word;  /* Permite que el texto se divida si es muy largo */
 }
 
-.exercise-table th {
-  background-color: #007bff;
-  color: white;
+/* Por defecto, alineamos verticalmente al tope (útil para la columna de Ejercicio) */
+.exercise-table td {
+  vertical-align: top;
 }
 
 /* Anchos fijos para cada columna */
 .exercise-table th:nth-child(1),
-.exercise-table td:nth-child(1) { width: 10%; }  /* Checkbox */
+.exercise-table td:nth-child(1) {
+  width: 10%;  /* Checkbox */
+}
 
 .exercise-table th:nth-child(2),
-.exercise-table td:nth-child(2) { width: 30%; }  /* Ejercicio */
+.exercise-table td:nth-child(2) {
+  width: 30%;  /* Ejercicio */
+}
 
 .exercise-table th:nth-child(3),
-.exercise-table td:nth-child(3) { width: 20%; }  /* Músculo */
+.exercise-table td:nth-child(3) {
+  width: 20%;  /* Músculo */
+}
 
 .exercise-table th:nth-child(4),
-.exercise-table td:nth-child(4) { width: 20%; }  /* Series */
+.exercise-table td:nth-child(4) {
+  width: 20%;  /* Series */
+}
 
 .exercise-table th:nth-child(5),
-.exercise-table td:nth-child(5) { width: 20%; }  /* Realizadas */
+.exercise-table td:nth-child(5) {
+  width: 20%;  /* Realizadas */
+}
 
-/* Dentro de la columna "Realizadas" ajustamos el contenedor de botones */
-.realizadas-column .series-tracker {
+/* Para las columnas Músculo y Series (4ta columna) ya se ven centradas.
+   En la 5ta columna (Realizadas) forzamos la alineación vertical en medio: */
+.exercise-table td:nth-child(5) {
+  vertical-align: middle;
+}
+
+/* Opcional: si deseas que el contenedor de botones en la columna Realizadas ocupe
+   el 100% de la celda y se centre, puedes usar lo siguiente */
+.realizadas-column .series-tracker,
+.exercise-table td:nth-child(5) .series-tracker {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 /* Botones de control de series */
@@ -117,7 +136,7 @@ h1 {
   color: #333;
 }
 
-/* Ajustes responsive */
+/* Ajustes para dispositivos pequeños */
 @media (max-width: 600px) {
   .exercise-table {
       font-size: 14px;
