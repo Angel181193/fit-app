@@ -1,8 +1,8 @@
 document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault(); // Evita el envío por defecto
 
-  const usuarioInput = document.getElementById('usuario').value.trim();
-  const claveInput = document.getElementById('clave').value.trim();
+  const usuarioInput = document.getElementById('Usuario').value.trim();
+  const claveInput = document.getElementById('Clave').value.trim();
 
   document.getElementById('mensaje').innerText = "Verificando...";
 
