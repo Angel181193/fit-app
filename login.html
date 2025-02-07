@@ -17,18 +17,20 @@
     <p id="mensaje"></p>
   </div>
 
-  <!-- Cargamos Tabletop.js desde un CDN -->
   <script src="https://cdn.jsdelivr.net/npm/tabletop@1.5.4/src/tabletop.js"></script>
   <script>
     // Manejo del login
     document.getElementById('login-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Evitar que se recargue la página
 
-      // Aquí debes validar las credenciales (esto lo simula)
-      const usuario = document.getElementById('usuario').value;
-      const clave = document.getElementById('clave').value;
+      // Obtenemos los valores de usuario y clave
+      const usuario = document.getElementById('usuario').value.trim(); // .trim() para quitar posibles espacios
+      const clave = document.getElementById('clave').value.trim();
 
-      // Si las credenciales son correctas (simulamos que siempre lo son)
+      console.log("Usuario:", usuario); // Debug
+      console.log("Clave:", clave); // Debug
+
+      // Aquí debes validar las credenciales (esto lo simula)
       if (usuario === 'usuario' && clave === 'clave') {
         const userToken = "token_de_usuario"; // Simulamos un token de usuario
 
