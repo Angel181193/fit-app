@@ -1,4 +1,14 @@
-// Escucha el envío del formulario de login
+document.addEventListener("DOMContentLoaded", function () {
+  const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado'));
+
+  // Si el usuario ya está logueado, lo redirigimos a index.html
+  if (usuarioLogueado) {
+    window.location.href = "index.html";
+    return;
+  }
+});
+
+// Escucha el envío del formulario de login 
 document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault(); // Evita el envío por defecto
 
@@ -30,3 +40,4 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
       document.getElementById('mensaje').innerText = "Error al conectar con el servidor.";
     });
 });
+
