@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página de Ejercicios</title>
   <script>
-    // Comprobamos si el usuario está logueado
     window.onload = function() {
+      // Comprobamos si el usuario está logueado
       const userToken = localStorage.getItem("userToken"); // Obtenemos el token del almacenamiento local
 
       // Si no existe el token (el usuario no está logueado), redirigimos al login
       if (!userToken) {
         window.location.href = "login.html"; // Redirige a la página de login
       }
-    }
+    };
   </script>
 </head>
 <body>
   <div class="container">
-    <h1>Mi Rutina de Entrenamiento</h1>
+    <h1>Mi Rutina GalletoFIT</h1>
 
     <!-- Selector de día -->
     <label for="select-dia">Selecciona un día:</label>
