@@ -43,42 +43,31 @@ h1, h2 {
   border-bottom: 1px solid #ddd;
 }
 
+/* Columna 4 y 5 */
+.exercise-table td:nth-child(4), .exercise-table td:nth-child(5) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .exercise-table th {
   background-color: #007bff;
   color: white;
 }
 
-/* Ajustes para responsive */
-@media (max-width: 600px) {
-  .exercise-table {
-    font-size: 14px;
-  }
-
-  .exercise-table th, .exercise-table td {
-    padding: 8px;
-  }
-
-  .series-tracker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
-
-  .series-tracker button {
-    padding: 4px 8px;
-    font-size: 12px;
-  }
+.exercise-table td {
+  vertical-align: middle; /* Alinea el contenido verticalmente */
 }
 
-/* Botones de control de series */
+/* Columna de Series */
 .series-tracker {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 }
 
+/* Botones de control de series */
 .series-tracker button {
   background: #007bff;
   color: white;
@@ -142,15 +131,18 @@ h1, h2 {
 }
 
 /* Ajustes para el desajuste de la columna de realizadas */
-.exercise-table td {
-  vertical-align: top; /* Alinea el contenido de las celdas desde la parte superior */
-}
-
-.exercise-table td:nth-child(2) {
-  word-wrap: break-word; /* Permite que las palabras se rompan si son demasiado largas */
+.exercise-table td:nth-child(5) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .exercise-table td:nth-child(4) {
   display: flex;
-  align-items: center; /* Centra verticalmente el contenido de la celda */
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-table td:nth-child(2) {
+  word-wrap: break-word; /* Permite que las palabras se rompan si son demasiado largas */
 }
