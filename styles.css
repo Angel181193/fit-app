@@ -54,7 +54,7 @@ h1, h2 {
 /* Anchos fijos para cada columna */
 .exercise-table th:nth-child(1),
 .exercise-table td:nth-child(1) {
-  width: 7%;  /* Checkbox */
+  width: 5%;  /* Checkbox */
 }
 
 .exercise-table th:nth-child(2),
@@ -74,7 +74,7 @@ h1, h2 {
 
 .exercise-table th:nth-child(5),
 .exercise-table td:nth-child(5) {
-  width: 33%;  /* Realizadas */
+  width: 35%;  /* Realizadas */
 }
 
 /* Para las columnas Músculo y Series (4ta columna) ya se ven centradas.
