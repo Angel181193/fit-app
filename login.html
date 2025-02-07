@@ -24,14 +24,14 @@
       event.preventDefault(); // Evitar que se recargue la página
 
       // Obtenemos los valores de usuario y clave
-      const usuario = document.getElementById('usuario').value.trim(); // .trim() para quitar posibles espacios
-      const clave = document.getElementById('clave').value.trim();
+      const usuario = document.getElementById('Usuario').value.trim(); // .trim() para quitar posibles espacios
+      const clave = document.getElementById('Clave').value.trim();
 
-      console.log("Usuario:", usuario); // Debug
-      console.log("Clave:", clave); // Debug
+      console.log("Usuario:", Usuario); // Debug
+      console.log("Clave:", Clave); // Debug
 
       // Aquí debes validar las credenciales (esto lo simula)
-      if (usuario === 'usuario' && clave === 'clave') {
+      if (Usuario === 'Csuario' && Clave === 'Clave') {
         const userToken = "token_de_usuario"; // Simulamos un token de usuario
 
         // Guardamos el token en localStorage
