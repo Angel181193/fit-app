@@ -44,10 +44,11 @@ h1, h2 {
   border-bottom: 1px solid #ddd;
   text-align: center;
   word-wrap: break-word;  /* Permite que el texto se divida si es muy largo */
+  vertical-align: middle;  /* Por defecto, todas las celdas quedan centradas verticalmente */
 }
 
-/* Por defecto, alineamos verticalmente al tope (útil para la columna de Ejercicio) */
-.exercise-table td {
+/* Sobrescribimos la columna de Ejercicio para que se alinee en la parte superior */
+.exercise-table td:nth-child(2) {
   vertical-align: top;
 }
 
@@ -77,21 +78,14 @@ h1, h2 {
   width: 24%;  /* Realizadas */
 }
 
-/* Para las columnas Músculo y Series (4ta columna) ya se ven centradas.
-   En la 5ta columna (Realizadas) forzamos la alineación vertical en medio: */
-.exercise-table td:nth-child(5) {
-  vertical-align: middle;
-}
-
-/* Opcional: si deseas que el contenedor de botones en la columna Realizadas ocupe
-   el 100% de la celda y se centre, puedes usar lo siguiente */
+/* Contenedor de botones en la columna "Realizadas" */
 .realizadas-column .series-tracker,
 .exercise-table td:nth-child(5) .series-tracker {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  /* Se eliminó height: 100% para no forzar la altura */
 }
 
 /* Botones de control de series */
