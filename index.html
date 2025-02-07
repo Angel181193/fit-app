@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitApp</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Página de Ejercicios</title>
+  <script>
+    // Comprobamos si el usuario está logueado
+    window.onload = function() {
+      const userToken = localStorage.getItem("userToken"); // Obtenemos el token del almacenamiento local
+
+      // Si no existe el token (el usuario no está logueado), redirigimos al login
+      if (!userToken) {
+        window.location.href = "login.html"; // Redirige a la página de login
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
