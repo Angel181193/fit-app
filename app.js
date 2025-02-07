@@ -1,20 +1,45 @@
 const ejerciciosPorDia = {
-  lunes: [
-      { nombre: "Press inclinado con mancuernas", grupo: "Pecho", series: 4, realizadas: 0 },
-      { nombre: "Aperturas con mancuernas", grupo: "Pecho", series: 3, realizadas: 0 }
+  "lunes": [
+    { "nombre": "Press inclinado con barra", "grupo": "Pecho", "series": 4, "realizadas": 0 },
+    { "nombre": "Press plano con barra", "grupo": "Pecho", "series": 4, "realizadas": 0 },
+    { "nombre": "Planchas con peso", "grupo": "Abdomen", "series": 3, "realizadas": 0 },
+    { "nombre": "Crunch en polea", "grupo": "Abdomen", "series": 4, "realizadas": 0 },
+    { "nombre": "Russian Twists", "grupo": "Abdomen", "series": 3, "realizadas": 0 }
   ],
-  martes: [
-      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
-      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 3, realizadas: 0 }
+  "martes": [
+    { "nombre": "Jalón al pecho en polea", "grupo": "Espalda", "series": 4, "realizadas": 0 },
+    { "nombre": "Curl con polea", "grupo": "Bíceps", "series": 4, "realizadas": 0 },
+    { "nombre": "Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 4, "realizadas": 0 },
+    { "nombre": "Elevación de piernas colgado", "grupo": "Abdomen", "series": 3, "realizadas": 0 }
   ],
-  miercoles: [
-      { nombre: "Remo con mancuerna", grupo: "Espalda", series: 4, realizadas: 0 },
-      { nombre: "Jalón al pecho en polea", grupo: "Espalda", series: 8, realizadas: 0 }
+  "miércoles": [
+    { "nombre": "Press militar con mancuernas", "grupo": "Hombros", "series": 4, "realizadas": 0 },
+    { "nombre": "Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 4, "realizadas": 0 },
+    { "nombre": "Elevación de piernas colgado", "grupo": "Abdomen", "series": 3, "realizadas": 0 },
+    { "nombre": "Russian Twists", "grupo": "Abdomen", "series": 3, "realizadas": 0 }
   ],
-  jueves: [
-      { nombre: "Correr", grupo: "HIT", series: 5, realizadas: 0 },
-      { nombre: "Remo en polea baja", grupo: "Espalda", series: 8, realizadas: 0 },
-      { nombre: "Extensión de tríceps en polea", grupo: "Tríceps", series: 8, realizadas: 0 }
+  "jueves": [
+    { "nombre": "Press inclinado con barra", "grupo": "Pecho", "series": 4, "realizadas": 0 },
+    { "nombre": "Jalón al pecho en polea", "grupo": "Espalda", "series": 4, "realizadas": 0 },
+    { "nombre": "Curl con polea", "grupo": "Bíceps", "series": 4, "realizadas": 0 },
+    { "nombre": "Planchas con peso", "grupo": "Abdomen", "series": 3, "realizadas": 0 }
+  ],
+  "viernes": [
+    { "nombre": "Press plano con barra", "grupo": "Pecho", "series": 4, "realizadas": 0 },
+    { "nombre": "Jalón al pecho en polea", "grupo": "Espalda", "series": 4, "realizadas": 0 },
+    { "nombre": "Elevación de piernas colgado", "grupo": "Abdomen", "series": 3, "realizadas": 0 },
+    { "nombre": "Crunch en polea", "grupo": "Abdomen", "series": 4, "realizadas": 0 }
+  ],
+  "sábado": [
+    { "nombre": "Press militar con mancuernas", "grupo": "Hombros", "series": 4, "realizadas": 0 },
+    { "nombre": "Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 4, "realizadas": 0 },
+    { "nombre": "Elevación de piernas colgado", "grupo": "Abdomen", "series": 3, "realizadas": 0 },
+    { "nombre": "Russian Twists", "grupo": "Abdomen", "series": 3, "realizadas": 0 }
+  ],
+  "domingo": [
+    { "nombre": "Sentadillas con mancuernas", "grupo": "Pierna", "series": 4, "realizadas": 0 },
+    { "nombre": "Zancadas con mancuernas", "grupo": "Pierna", "series": 4, "realizadas": 0 },
+    { "nombre": "Elevación de talones", "grupo": "Pierna", "series": 3, "realizadas": 0 }
   ]
 };
 
