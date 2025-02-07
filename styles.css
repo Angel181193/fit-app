@@ -54,27 +54,27 @@ h1, h2 {
 /* Anchos fijos para cada columna */
 .exercise-table th:nth-child(1),
 .exercise-table td:nth-child(1) {
-  width: 3%;  /* Checkbox */
+  width: 5%;  /* Checkbox */
 }
 
 .exercise-table th:nth-child(2),
 .exercise-table td:nth-child(2) {
-  width: 33%;  /* Ejercicio */
+  width: 30%;  /* Ejercicio */
 }
 
 .exercise-table th:nth-child(3),
 .exercise-table td:nth-child(3) {
-  width: 12%;  /* Músculo */
+  width: 15%;  /* Músculo */
 }
 
 .exercise-table th:nth-child(4),
 .exercise-table td:nth-child(4) {
-  width: 12%;  /* Series */
+  width: 15%;  /* Series */
 }
 
 .exercise-table th:nth-child(5),
 .exercise-table td:nth-child(5) {
-  width: 40%;  /* Realizadas */
+  width: 35%;  /* Realizadas */
 }
 
 /* Para las columnas Músculo y Series (4ta columna) ya se ven centradas.
