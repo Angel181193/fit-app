@@ -142,3 +142,19 @@ startWorkoutBtn.addEventListener("click", iniciarEntrenamiento);
 finishWorkoutBtn.addEventListener("click", finalizarEntrenamiento);
 
 actualizarListaEjercicios();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutButton = document.getElementById("logoutButton");
+
+  if (logoutButton) {
+      logoutButton.addEventListener("click", function () {
+          // Eliminar sesión almacenada (puede ser en localStorage o sessionStorage)
+          localStorage.removeItem("userToken"); 
+          sessionStorage.removeItem("userToken");
+
+          // Redirigir al login
+          window.location.href = "login.html";
+      });
+  }
+});
+
