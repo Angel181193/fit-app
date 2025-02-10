@@ -86,9 +86,9 @@ function actualizarListaEjercicios() {
           <td>${ejercicio.grupo}</td>
           <td>${ejercicio.series}</td>
           <td class="series-tracker">
-              <button onclick="restarSerie(${index})">-</button>
+              <button onclick="restarSerie(${index})" aria-label="Disminuir serie" ${ejercicio.realizadas <= 0 ? 'disabled' : ''}>-</button>
               <span id="series-${index}">${ejercicio.realizadas}</span>
-              <button onclick="sumarSerie(${index})">+</button>
+              <button onclick="sumarSerie(${index})" aria-label="Aumentar serie">+</button>
           </td>
       `;
       listaEjercicios.appendChild(row);
@@ -140,5 +140,3 @@ function sumarSerie(index) {
 selectDia.addEventListener("change", actualizarListaEjercicios);
 startWorkoutBtn.addEventListener("click", iniciarEntrenamiento);
 finishWorkoutBtn.addEventListener("click", finalizarEntrenamiento);
-
-actualizarListaEjercicios();
