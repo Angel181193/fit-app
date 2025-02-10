@@ -247,20 +247,20 @@ function verificarCompletados() {
 }
 
   // Finalizar entrenamiento
-  finishButton.addEventListener("click", function () {
-      let totalTime = (Date.now() - startTime) / 1000;
-      let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+  let totalTime = (Date.now() - startTime) / 1000;
+  let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
 
-      if (exerciseTimes.length === 0) {
-          summaryMessage += "❌ No completaste ningún ejercicio.";
-      } else {
-          exerciseTimes.forEach((time, index) => {
-              summaryMessage += `Ejercicio ${index + 1}: ${time.toFixed(2)} segundos\n`;
-          });
-          summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
-      }
+  if (exerciseTimes.length === 0) {
+      summaryMessage += "❌ No completaste ningún ejercicio.";
+  } else {
+      // Aquí recorremos cada ejercicio y mostramos su nombre
+      exerciseTimes.forEach((time, index) => {
+          const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+          summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+      });
+      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+  }
 
-      alert(summaryMessage);
-      window.location.reload();
-  });
+  alert(summaryMessage);
+  window.location.reload();
 });
