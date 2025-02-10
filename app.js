@@ -199,6 +199,23 @@ exerciseTable.addEventListener("change", function (event) {
       }
   }
 });
+
+function verificarCompletados() {
+  const checkboxes = document.querySelectorAll(".checkbox");
+  
+  checkboxes.forEach((checkbox, index) => {
+    const seriesEl = document.getElementById(`series-${index}`);
+    const realizadas = parseInt(seriesEl.innerText);
+    const series = ejerciciosPorDia[selectDia.value][index].series;
+
+    // Si las series realizadas son menores que las series totales, el checkbox se desactiva
+    checkbox.disabled = realizadas < series;
+  });
+
+  const todosMarcados = [...checkboxes].every(chk => chk.checked);
+  finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
+}
+
   // Finalizar entrenamiento
   finishButton.addEventListener("click", function () {
       let totalTime = (Date.now() - startTime) / 1000;
