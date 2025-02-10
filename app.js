@@ -72,6 +72,7 @@ const timerDisplay = document.getElementById("timer");
 let timer;
 let seconds = 0;
 
+// Función para actualizar la lista de ejercicios
 function actualizarListaEjercicios() {
   const diaSeleccionado = selectDia.value;
   const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
@@ -97,6 +98,7 @@ function actualizarListaEjercicios() {
   verificarCompletados();
 }
 
+// Función para iniciar el entrenamiento
 function iniciarEntrenamiento() {
   clearInterval(timer);
   seconds = 0;
@@ -110,46 +112,63 @@ function iniciarEntrenamiento() {
   }, 1000);
 }
 
+// Función para finalizar el entrenamiento
 function finalizarEntrenamiento() {
   clearInterval(timer);
   timerDisplay.innerText += " (Finalizado)";
   finishWorkoutBtn.style.display = "none";
 }
 
+// Verifica si los ejercicios están completos y habilita/deshabilita los checkboxes
 function verificarCompletados() {
   const checkboxes = document.querySelectorAll(".checkbox");
+
+  checkboxes.forEach((checkbox, index) => {
+      const seriesEl = document.getElementById(`series-${index}`);
+      const series = parseInt(seriesEl.innerText);
+      const ejercicio = ejerciciosPorDia[selectDia.value][index];
+
+      // Si el número de series realizadas es suficiente, habilitamos el checkbox
+      if (series >= ejercicio.series) {
+          checkbox.disabled = false;
+      } else {
+          checkbox.disabled = true;
+      }
+  });
+
+  // Verificar si todos los ejercicios están completos para mostrar el botón de finalizar
   const todosMarcados = [...checkboxes].every(chk => chk.checked);
-
   finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
-
-  // Deshabilitar los checkboxes si todos están marcados
-  if (todosMarcados) {
-    checkboxes.forEach(chk => chk.disabled = true);
-  }
 }
 
+// Función para restar series
 function restarSerie(index) {
   let seriesEl = document.getElementById(`series-${index}`);
   let series = parseInt(seriesEl.innerText);
   if (series > 0) {
       seriesEl.innerText = series - 1;
   }
+  verificarCompletados(); // Verificar si ya se pueden marcar los checkboxes
 }
 
+// Función para sumar series
 function sumarSerie(index) {
   let seriesEl = document.getElementById(`series-${index}`);
   let series = parseInt(seriesEl.innerText);
   let ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener ejercicio
-  
+
   if (series < ejercicio.series) {
       seriesEl.innerText = series + 1;
   }
+  verificarCompletados(); // Verificar si ya se pueden marcar los checkboxes
 }
 
+// Eventos
 selectDia.addEventListener("change", actualizarListaEjercicios);
 startWorkoutBtn.addEventListener("click", iniciarEntrenamiento);
 finishWorkoutBtn.addEventListener("click", finalizarEntrenamiento);
 
+// Inicializar la lista de ejercicios
 actualizarListaEjercicios();
 
 document.addEventListener("DOMContentLoaded", function () {
