@@ -188,45 +188,54 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-workout");
   const finishButton = document.getElementById("finish-workout");
+  const auxilioButton = document.getElementById("auxilio-workout");  // Nuevo botón "Auxilio"
   const exerciseTable = document.getElementById("ejercicios-lista");
   const timerDisplay = document.getElementById("timer");
-
-  const finishWorkoutBtn = document.getElementById("finish-workout");  // Corregido
 
   let startTime;
   let exerciseTimes = [];
   let lastCompletionTime = null;
 
+  // Crear el botón "Auxilio" en el HTML (pero ocultarlo inicialmente)
+  auxilioButton.style.display = "none";
+
   // Iniciar entrenamiento
   startButton.addEventListener("click", function () {
-      startTime = Date.now();
-      lastCompletionTime = startTime; // Guarda el tiempo de inicio
-      startButton.style.display = "none";
-      finishButton.style.display = "inline-block";
+    startTime = Date.now();
+    lastCompletionTime = startTime; // Guarda el tiempo de inicio
+    startButton.style.display = "none";
+    finishButton.style.display = "inline-block";
+    auxilioButton.style.display = "inline-block";  // Muestra el botón "Auxilio" cuando se inicia el entrenamiento
+  });
+
+  // Mostrar el botón "Finalizar entrenamiento" cuando se haga clic en "Auxilio"
+  auxilioButton.addEventListener("click", function () {
+    finishButton.style.display = "inline-block";  // Muestra el botón de finalizar entrenamiento
+    auxilioButton.style.display = "none";  // Oculta el botón "Auxilio"
   });
 
   // Este evento se dispara cuando el checkbox de un ejercicio cambia
   exerciseTable.addEventListener("change", function (event) {
     if (event.target.classList.contains("checkbox")) {
-        let row = event.target.closest("tr");
-        let series = parseInt(row.querySelector(".series-tracker span").textContent, 10);
-        let realizadas = parseInt(row.querySelector(".series-tracker span").textContent, 10);
+      let row = event.target.closest("tr");
+      let series = parseInt(row.querySelector(".series-tracker span").textContent, 10);
+      let realizadas = parseInt(row.querySelector(".series-tracker span").textContent, 10);
 
-        if (realizadas >= series) {
-            let completionTime = Date.now();
-            let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
-            exerciseTimes.push(exerciseTime);
-            lastCompletionTime = completionTime;
+      if (realizadas >= series) {
+        let completionTime = Date.now();
+        let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
+        exerciseTimes.push(exerciseTime);
+        lastCompletionTime = completionTime;
 
-            // Mostrar tiempo debajo del cronómetro
-            let timeRow = document.createElement("p");
-            timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
-            timerDisplay.appendChild(timeRow);
+        // Mostrar tiempo debajo del cronómetro
+        let timeRow = document.createElement("p");
+        timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
+        timerDisplay.appendChild(timeRow);
 
-            // Marcar el ejercicio como completado (puedes añadir algún estilo visual para marcarlo)
-            event.target.disabled = true;  // Deshabilita el checkbox
-            row.style.backgroundColor = "#d4edda"; // Cambiar el color de fondo para indicar completado
-        }
+        // Marcar el ejercicio como completado (puedes añadir algún estilo visual para marcarlo)
+        event.target.disabled = true;  // Deshabilita el checkbox
+        row.style.backgroundColor = "#d4edda"; // Cambiar el color de fondo para indicar completado
+      }
     }
   });
 
@@ -245,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return false; // Si no, el checkbox no se puede marcar
     });
 
-    finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
+    finishButton.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
   }
 
   // Finalizar entrenamiento
@@ -254,14 +263,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
 
     if (exerciseTimes.length === 0) {
-        summaryMessage += "❌ No completaste ningún ejercicio.";
+      summaryMessage += "❌ No completaste ningún ejercicio.";
     } else {
-        // Aquí recorremos cada ejercicio y mostramos su nombre
-        exerciseTimes.forEach((time, index) => {
-            const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
-            summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
-        });
-        summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+      // Aquí recorremos cada ejercicio y mostramos su nombre
+      exerciseTimes.forEach((time, index) => {
+        const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+        summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+      });
+      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
     }
 
     alert(summaryMessage);
