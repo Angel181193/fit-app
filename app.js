@@ -134,7 +134,11 @@ function restarSerie(index) {
 function sumarSerie(index) {
   let seriesEl = document.getElementById(`series-${index}`);
   let series = parseInt(seriesEl.innerText);
-  seriesEl.innerText = series + 1;
+  let ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener ejercicio
+  
+  if (series < ejercicio.series) {
+      seriesEl.innerText = series + 1;
+  }
 }
 
 selectDia.addEventListener("change", actualizarListaEjercicios);
@@ -202,17 +206,19 @@ exerciseTable.addEventListener("change", function (event) {
 
 function verificarCompletados() {
   const checkboxes = document.querySelectorAll(".checkbox");
-  
-  checkboxes.forEach((checkbox, index) => {
-    const seriesEl = document.getElementById(`series-${index}`);
-    const realizadas = parseInt(seriesEl.innerText);
-    const series = ejerciciosPorDia[selectDia.value][index].series;
+  const todosMarcados = [...checkboxes].every(chk => {
+      const index = chk.id.replace("ejercicio-", ""); // obtener el índice del ejercicio
+      const seriesEl = document.getElementById(`series-${index}`);
+      const series = parseInt(seriesEl.innerText);
+      const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener ejercicio del día
 
-    // Si las series realizadas son menores que las series totales, el checkbox se desactiva
-    checkbox.disabled = realizadas < series;
+      // Verificar si las series realizadas son iguales a las series
+      if (series >= ejercicio.series) {
+          return chk.checked; // Solo marcar si las series realizadas son suficientes
+      }
+      return false; // Si no, el checkbox no se puede marcar
   });
 
-  const todosMarcados = [...checkboxes].every(chk => chk.checked);
   finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
 }
 
