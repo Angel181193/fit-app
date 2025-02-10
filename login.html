@@ -24,9 +24,9 @@
     document.getElementById('login-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Evitar que se recargue la página
 
-      // Obtenemos los valores de usuario y clave
-      const usuario = document.getElementById('usuario').value.trim(); // Usamos 'usuario' en minúsculas
-      const clave = document.getElementById('clave').value.trim(); // Usamos 'clave' en minúsculas
+      // Obtenemos los valores de usuario y clave (Asegúrate de usar el mismo nombre de id)
+      const usuario = document.getElementById('usuario').value.trim(); // "usuario" en minúsculas
+      const clave = document.getElementById('clave').value.trim(); // "clave" en minúsculas
 
       console.log("Usuario:", usuario); // Debug
       console.log("Clave:", clave); // Debug
@@ -48,3 +48,4 @@
   </script>
 </body>
 </html>
+
