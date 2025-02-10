@@ -157,4 +157,60 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const startButton = document.getElementById("start-workout");
+  const finishButton = document.getElementById("finish-workout");
+  const exerciseTable = document.getElementById("ejercicios-lista");
+  const timerDisplay = document.getElementById("timer");
+  
+  let startTime;
+  let exerciseTimes = [];
+  let lastCompletionTime = null;
+
+  // Iniciar entrenamiento
+  startButton.addEventListener("click", function () {
+      startTime = Date.now();
+      lastCompletionTime = startTime; // Primera referencia de tiempo
+      startButton.style.display = "none";
+      finishButton.style.display = "inline-block";
+  });
+
+  // Marcar ejercicio como completado
+  exerciseTable.addEventListener("click", function (event) {
+      if (event.target.classList.contains("complete-checkbox")) {
+          let row = event.target.closest("tr");
+          let series = parseInt(row.querySelector(".series").textContent, 10);
+          let realizadas = parseInt(row.querySelector(".realizadas").textContent, 10);
+
+          if (realizadas >= series) {
+              event.target.checked = true;
+
+              let completionTime = Date.now();
+              let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
+              exerciseTimes.push(exerciseTime);
+              lastCompletionTime = completionTime;
+
+              let timeRow = document.createElement("p");
+              timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
+              timerDisplay.appendChild(timeRow);
+          } else {
+              alert("No puedes completar este ejercicio hasta que las series sean igual o superiores a las realizadas.");
+              event.target.checked = false;
+          }
+      }
+  });
+
+  // Finalizar entrenamiento
+  finishButton.addEventListener("click", function () {
+      let totalTime = (Date.now() - startTime) / 1000;
+      let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+      exerciseTimes.forEach((time, index) => {
+          summaryMessage += `Ejercicio ${index + 1}: ${time.toFixed(2)} segundos\n`;
+      });
+      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+
+      alert(summaryMessage);
+      window.location.reload();
+  });
+});
 
