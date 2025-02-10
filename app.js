@@ -278,3 +278,35 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+let startTime = Date.now();  // Guardamos el tiempo de inicio
+let elapsedTime = 0;         // Tiempo transcurrido
+let timerInterval;
+
+function startTimer() {
+    timerInterval = setInterval(function() {
+        elapsedTime = Date.now() - startTime;
+        updateTimerDisplay(elapsedTime);  // Actualiza la UI con el tiempo transcurrido
+    }, 1000);
+}
+
+function updateTimerDisplay(elapsedTime) {
+    const seconds = Math.floor(elapsedTime / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const formattedTime = `${hours}:${minutes % 60}:${seconds % 60}`;
+    document.getElementById("timer").textContent = formattedTime;
+}
+
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        // Pausar el temporizador si la ventana no está activa
+        clearInterval(timerInterval);
+    } else {
+        // Reanudar el temporizador cuando la ventana vuelva a ser visible
+        startTime = Date.now() - elapsedTime;  // Continuar desde donde se dejó
+        startTimer();
+    }
+});
+
+// Iniciar el temporizador cuando se carga la app
+startTimer();
