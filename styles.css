@@ -124,10 +124,10 @@ h1, h2 {
 }
 
 #timer {
-  text-align: center;
   font-size: 18px;
-  margin-top: 10px;
+  text-align: center;
   color: #333;
+  margin-top: 10px;
 }
 
 /* Ajustes para dispositivos pequeños */
