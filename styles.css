@@ -105,7 +105,7 @@ h1, h2 {
 }
 
 /* Botones principales */
-#start-workout, #finish-workout {
+#start-workout, #finish-workout, #auxilio-workout:hover {
   display: block;
   width: 100%;
   padding: 12px;
@@ -119,7 +119,7 @@ h1, h2 {
   text-align: center;
 }
 
-#start-workout:hover, #finish-workout:hover {
+#start-workout:hover, #finish-workout:hover, #auxilio-workout:hover {
   background: #218838;
 }
 
