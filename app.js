@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Iniciar entrenamiento
   startButton.addEventListener("click", function () {
       startTime = Date.now();
-      lastCompletionTime = startTime; // Primera referencia de tiempo
+      lastCompletionTime = startTime; // Guarda el tiempo de inicio
       startButton.style.display = "none";
       finishButton.style.display = "inline-block";
   });
@@ -183,18 +183,20 @@ document.addEventListener("DOMContentLoaded", function () {
           let realizadas = parseInt(row.querySelector(".realizadas").textContent, 10);
 
           if (realizadas >= series) {
-              event.target.checked = true;
-
+              // Registrar tiempo del ejercicio
               let completionTime = Date.now();
               let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
               exerciseTimes.push(exerciseTime);
               lastCompletionTime = completionTime;
 
+              // Mostrar tiempo debajo del cronómetro
               let timeRow = document.createElement("p");
               timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
               timerDisplay.appendChild(timeRow);
+
+              event.target.checked = true;
           } else {
-              alert("No puedes completar este ejercicio hasta que las series sean igual o superiores a las realizadas.");
+              alert("No puedes completar este ejercicio hasta que el número de realizadas sea igual o mayor al de series.");
               event.target.checked = false;
           }
       }
@@ -204,13 +206,17 @@ document.addEventListener("DOMContentLoaded", function () {
   finishButton.addEventListener("click", function () {
       let totalTime = (Date.now() - startTime) / 1000;
       let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
-      exerciseTimes.forEach((time, index) => {
-          summaryMessage += `Ejercicio ${index + 1}: ${time.toFixed(2)} segundos\n`;
-      });
-      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+
+      if (exerciseTimes.length === 0) {
+          summaryMessage += "❌ No completaste ningún ejercicio.";
+      } else {
+          exerciseTimes.forEach((time, index) => {
+              summaryMessage += `Ejercicio ${index + 1}: ${time.toFixed(2)} segundos\n`;
+          });
+          summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+      }
 
       alert(summaryMessage);
       window.location.reload();
   });
 });
-
