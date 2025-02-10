@@ -22,21 +22,20 @@
       <option value="domingo">Domingo</option>
     </select>
 
-    <!-- Tabla de ejercicios -->
     <table class="exercise-table">
       <thead>
         <tr>
           <th>✔</th>
           <th>Ejercicio</th>
           <th>Músculo</th>
-          <th class="series-column">Series</th>
-          <th class="realizadas-column">Realizadas</th>
+          <th class="series">Series</th>   <!-- ← Asegurar que esta columna tenga la clase "series" -->
+          <th class="realizadas">Realizadas</th>  <!-- ← Asegurar que esta columna tenga la clase "realizadas" -->
         </tr>
       </thead>
       <tbody id="ejercicios-lista">
         <!-- Las filas se generan dinámicamente desde app.js -->
       </tbody>
-    </table>
+    </table>    
 
     <!-- Botones para controlar el entrenamiento -->
     <button id="start-workout">Iniciar Entrenamiento</button>

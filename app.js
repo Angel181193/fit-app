@@ -175,31 +175,30 @@ document.addEventListener("DOMContentLoaded", function () {
       finishButton.style.display = "inline-block";
   });
 
-  // Marcar ejercicio como completado
-  exerciseTable.addEventListener("change", function (event) {
-      if (event.target.classList.contains("complete-checkbox")) {
-          let row = event.target.closest("tr");
-          let series = parseInt(row.querySelector(".series").textContent, 10);
-          let realizadas = parseInt(row.querySelector(".realizadas").textContent, 10);
+// Este evento se dispara cuando el checkbox de un ejercicio cambia
+exerciseTable.addEventListener("change", function (event) {
+  if (event.target.classList.contains("checkbox")) {
+      let row = event.target.closest("tr");
+      let series = parseInt(row.querySelector(".series-tracker span").textContent, 10);
+      let realizadas = parseInt(row.querySelector(".series-tracker span").textContent, 10);
 
-          if (realizadas >= series) {
-              // Registrar tiempo del ejercicio
-              let completionTime = Date.now();
-              let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
-              exerciseTimes.push(exerciseTime);
-              lastCompletionTime = completionTime;
+      if (realizadas >= series) {
+          let completionTime = Date.now();
+          let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
+          exerciseTimes.push(exerciseTime);
+          lastCompletionTime = completionTime;
 
-              // Mostrar tiempo debajo del cronómetro
-              let timeRow = document.createElement("p");
-              timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
-              timerDisplay.appendChild(timeRow);
-          } else {
-              alert("⚠️ No puedes marcar este ejercicio como completado hasta que el número de realizadas sea igual o mayor al de series.");
-              event.target.checked = false; // Desmarcar el checkbox
-          }
+          // Mostrar tiempo debajo del cronómetro
+          let timeRow = document.createElement("p");
+          timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
+          timerDisplay.appendChild(timeRow);
+
+          // Marcar el ejercicio como completado (puedes añadir algún estilo visual para marcarlo)
+          event.target.disabled = true;  // Deshabilita el checkbox
+          row.style.backgroundColor = "#d4edda"; // Cambiar el color de fondo para indicar completado
       }
-  });
-
+  }
+});
   // Finalizar entrenamiento
   finishButton.addEventListener("click", function () {
       let totalTime = (Date.now() - startTime) / 1000;
