@@ -121,6 +121,11 @@ function verificarCompletados() {
   const todosMarcados = [...checkboxes].every(chk => chk.checked);
 
   finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
+
+  // Deshabilitar los checkboxes si todos están marcados
+  if (todosMarcados) {
+    checkboxes.forEach(chk => chk.disabled = true);
+  }
 }
 
 function restarSerie(index) {
