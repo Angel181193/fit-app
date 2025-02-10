@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Marcar ejercicio como completado
-  exerciseTable.addEventListener("click", function (event) {
+  exerciseTable.addEventListener("change", function (event) {
       if (event.target.classList.contains("complete-checkbox")) {
           let row = event.target.closest("tr");
           let series = parseInt(row.querySelector(".series").textContent, 10);
@@ -193,11 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
               let timeRow = document.createElement("p");
               timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
               timerDisplay.appendChild(timeRow);
-
-              event.target.checked = true;
           } else {
-              alert("No puedes completar este ejercicio hasta que el número de realizadas sea igual o mayor al de series.");
-              event.target.checked = false;
+              alert("⚠️ No puedes marcar este ejercicio como completado hasta que el número de realizadas sea igual o mayor al de series.");
+              event.target.checked = false; // Desmarcar el checkbox
           }
       }
   });
