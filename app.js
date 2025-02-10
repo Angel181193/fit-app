@@ -186,127 +186,180 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 document.addEventListener("DOMContentLoaded", function () {
-  const startButton = document.getElementById("start-workout");
-  const finishButton = document.getElementById("finish-workout");
-  const auxilioButton = document.getElementById("auxilio-workout");  // Nuevo botón "Auxilio"
-  const exerciseTable = document.getElementById("ejercicios-lista");
+  // Variables
+  const selectDia = document.getElementById("select-dia");
+  const listaEjercicios = document.getElementById("ejercicios-lista");
+  const startWorkoutBtn = document.getElementById("start-workout");
+  const finishWorkoutBtn = document.getElementById("finish-workout");
   const timerDisplay = document.getElementById("timer");
+  const auxilioButton = document.getElementById("auxilio-workout");
+  const logoutButton = document.getElementById("logoutButton");
 
-  let startTime;
-  let exerciseTimes = [];
-  let lastCompletionTime = null;
+  // Variables de temporizador
+  let timer;
+  let seconds = 0;
 
-  // Crear el botón "Auxilio" en el HTML (pero ocultarlo inicialmente)
-  auxilioButton.style.display = "none";
+  // Función para actualizar la lista de ejercicios
+  function actualizarListaEjercicios() {
+      const diaSeleccionado = selectDia.value;
+      const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
 
-  // Iniciar entrenamiento
-  startButton.addEventListener("click", function () {
-    startTime = Date.now();
-    lastCompletionTime = startTime; // Guarda el tiempo de inicio
-    startButton.style.display = "none";
-    finishButton.style.display = "inline-block";
-    auxilioButton.style.display = "inline-block";  // Muestra el botón "Auxilio" cuando se inicia el entrenamiento
-  });
+      listaEjercicios.innerHTML = "";
+      ejercicios.forEach((ejercicio, index) => {
+          const row = document.createElement("tr");
 
-  // Mostrar el botón "Finalizar entrenamiento" cuando se haga clic en "Auxilio"
-  auxilioButton.addEventListener("click", function () {
-    finishButton.style.display = "inline-block";  // Muestra el botón de finalizar entrenamiento
-    auxilioButton.style.display = "none";  // Oculta el botón "Auxilio"
-  });
+          row.innerHTML = `
+              <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
+              <td>${ejercicio.nombre}</td>
+              <td>${ejercicio.grupo}</td>
+              <td>${ejercicio.series}</td>
+              <td class="series-tracker">
+                  <button onclick="restarSerie(${index})">-</button>
+                  <span id="series-${index}">${ejercicio.realizadas}</span>
+                  <button onclick="sumarSerie(${index})">+</button>
+              </td>
+          `;
+          listaEjercicios.appendChild(row);
+      });
 
-  // Este evento se dispara cuando el checkbox de un ejercicio cambia
-  exerciseTable.addEventListener("change", function (event) {
-    if (event.target.classList.contains("checkbox")) {
-      let row = event.target.closest("tr");
-      let series = parseInt(row.querySelector(".series-tracker span").textContent, 10);
-      let realizadas = parseInt(row.querySelector(".series-tracker span").textContent, 10);
-
-      if (realizadas >= series) {
-        let completionTime = Date.now();
-        let exerciseTime = (lastCompletionTime) ? (completionTime - lastCompletionTime) / 1000 : (completionTime - startTime) / 1000;
-        exerciseTimes.push(exerciseTime);
-        lastCompletionTime = completionTime;
-
-        // Mostrar tiempo debajo del cronómetro
-        let timeRow = document.createElement("p");
-        timeRow.textContent = `Ejercicio ${exerciseTimes.length}: ${exerciseTime.toFixed(2)} segundos`;
-        timerDisplay.appendChild(timeRow);
-
-        // Marcar el ejercicio como completado (puedes añadir algún estilo visual para marcarlo)
-        event.target.disabled = true;  // Deshabilita el checkbox
-        row.style.backgroundColor = "#d4edda"; // Cambiar el color de fondo para indicar completado
-      }
-    }
-  });
-
-  function verificarCompletados() {
-    const checkboxes = document.querySelectorAll(".checkbox");
-    const todosMarcados = [...checkboxes].every(chk => {
-        const index = chk.id.replace("ejercicio-", ""); // obtener el índice del ejercicio
-        const seriesEl = document.getElementById(`series-${index}`);
-        const series = parseInt(seriesEl.innerText);
-        const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener ejercicio del día
-
-        // Verificar si las series realizadas son iguales a las series
-        if (series >= ejercicio.series) {
-            return chk.checked; // Solo marcar si las series realizadas son suficientes
-        }
-        return false; // Si no, el checkbox no se puede marcar
-    });
-
-    finishButton.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
+      verificarCompletados();
   }
 
-  // Finalizar entrenamiento
-  finishButton.addEventListener("click", function () {
-    let totalTime = (Date.now() - startTime) / 1000;
-    let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+  // Función para iniciar el entrenamiento
+  function iniciarEntrenamiento() {
+      clearInterval(timer);
+      seconds = 0;
+      timerDisplay.innerText = "Tiempo: 00:00";
 
-    if (exerciseTimes.length === 0) {
-      summaryMessage += "❌ No completaste ningún ejercicio.";
-    } else {
-      // Aquí recorremos cada ejercicio y mostramos su nombre
-      exerciseTimes.forEach((time, index) => {
-        const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
-        summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+      timer = setInterval(() => {
+          seconds++;
+          let min = Math.floor(seconds / 60);
+          let sec = seconds % 60;
+          timerDisplay.innerText = `Tiempo: ${min}:${sec < 10 ? "0" : ""}${sec}`;
+      }, 1000);
+  }
+
+  // Función para finalizar el entrenamiento
+  function finalizarEntrenamiento() {
+      clearInterval(timer);
+      timerDisplay.innerText += " (Finalizado)";
+      finishWorkoutBtn.style.display = "none";
+  }
+
+  // Verifica si los ejercicios están completos y habilita/deshabilita los checkboxes
+  function verificarCompletados() {
+      const checkboxes = document.querySelectorAll(".checkbox");
+
+      checkboxes.forEach((checkbox, index) => {
+          const seriesEl = document.getElementById(`series-${index}`);
+          const series = parseInt(seriesEl.innerText);
+          const ejercicio = ejerciciosPorDia[selectDia.value][index];
+
+          // Si el número de series realizadas es suficiente, habilitamos el checkbox
+          if (series >= ejercicio.series) {
+              checkbox.disabled = false;
+          } else {
+              checkbox.disabled = true;
+          }
       });
-      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
-    }
 
-    alert(summaryMessage);
-    window.location.reload();
+      // Verificar si todos los ejercicios están completos para mostrar el botón de finalizar
+      const todosMarcados = [...checkboxes].every(chk => chk.checked);
+      finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
+  }
+
+  // Función para restar series
+  function restarSerie(index) {
+      let seriesEl = document.getElementById(`series-${index}`);
+      let series = parseInt(seriesEl.innerText);
+      if (series > 0) {
+          seriesEl.innerText = series - 1;
+      }
+      verificarCompletados();
+  }
+
+  // Función para sumar series
+  function sumarSerie(index) {
+      let seriesEl = document.getElementById(`series-${index}`);
+      let series = parseInt(seriesEl.innerText);
+      let ejercicio = ejerciciosPorDia[selectDia.value][index]; 
+
+      if (series < ejercicio.series) {
+          seriesEl.innerText = series + 1;
+      }
+      verificarCompletados();
+  }
+
+  // Eventos
+  selectDia.addEventListener("change", actualizarListaEjercicios);
+  startWorkoutBtn.addEventListener("click", iniciarEntrenamiento);
+  finishWorkoutBtn.addEventListener("click", finalizarEntrenamiento);
+
+  // Inicializar la lista de ejercicios
+  actualizarListaEjercicios();
+
+  // Log out funcionalidad
+  if (logoutButton) {
+      logoutButton.addEventListener("click", function () {
+          localStorage.removeItem("userToken"); 
+          sessionStorage.removeItem("userToken");
+          window.location.href = "login.html";
+      });
+  }
+
+  // Botón "Auxilio" funcionalidad
+  auxilioButton.addEventListener("click", function () {
+      finishWorkoutBtn.style.display = "inline-block";
+      auxilioButton.style.display = "none";
   });
 
+  // Finalizar entrenamiento
+  finishWorkoutBtn.addEventListener("click", function () {
+      let totalTime = (Date.now() - startTime) / 1000;
+      let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+
+      if (exerciseTimes.length === 0) {
+          summaryMessage += "❌ No completaste ningún ejercicio.";
+      } else {
+          exerciseTimes.forEach((time, index) => {
+              const ejercicio = ejerciciosPorDia[selectDia.value][index]; 
+              summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+          });
+          summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+      }
+
+      alert(summaryMessage);
+      window.location.reload();
+  });
+
+  // Temporizador de visibilidad
+  let startTime = Date.now();  
+  let elapsedTime = 0;         
+  let timerInterval;
+
+  function startTimer() {
+      timerInterval = setInterval(function () {
+          elapsedTime = Date.now() - startTime;
+          updateTimerDisplay(elapsedTime);
+      }, 1000);
+  }
+
+  function updateTimerDisplay(elapsedTime) {
+      const seconds = Math.floor(elapsedTime / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const formattedTime = `${hours}:${minutes % 60}:${seconds % 60}`;
+      document.getElementById("timer").textContent = formattedTime;
+  }
+
+  document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+          clearInterval(timerInterval);
+      } else {
+          startTime = Date.now() - elapsedTime;
+          startTimer();
+      }
+  });
+
+  startTimer(); // Iniciar temporizador cuando se cargue la app
 });
-let startTime = Date.now();  // Guardamos el tiempo de inicio
-let elapsedTime = 0;         // Tiempo transcurrido
-let timerInterval;
-
-function startTimer() {
-    timerInterval = setInterval(function() {
-        elapsedTime = Date.now() - startTime;
-        updateTimerDisplay(elapsedTime);  // Actualiza la UI con el tiempo transcurrido
-    }, 1000);
-}
-
-function updateTimerDisplay(elapsedTime) {
-    const seconds = Math.floor(elapsedTime / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const formattedTime = `${hours}:${minutes % 60}:${seconds % 60}`;
-    document.getElementById("timer").textContent = formattedTime;
-}
-
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        // Pausar el temporizador si la ventana no está activa
-        clearInterval(timerInterval);
-    } else {
-        // Reanudar el temporizador cuando la ventana vuelva a ser visible
-        startTime = Date.now() - elapsedTime;  // Continuar desde donde se dejó
-        startTimer();
-    }
-});
-
-// Iniciar el temporizador cuando se carga la app
-startTimer();
