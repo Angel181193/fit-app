@@ -320,8 +320,9 @@ function actualizarListaEjercicios() {
 //     }
 //   };
 const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec';
   
+
     // Asegúrate de que los nombres de las propiedades coincidan con los que espera el script
     const datos = {
       user: user,
