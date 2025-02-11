@@ -4,10 +4,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  overflow-x: hidden; /* Evita que aparezca la barra de desplazamiento horizontal */
 }
 
 .container {
-  width: 95%;
+  width: 100%;
   max-width: 800px;
   margin: 15px auto;
   background: #fff;
