@@ -157,3 +157,52 @@ h1, h2 {
 .logout-btn:hover {
   background-color: #cc0000;
 }
+
+/* Estilos para el menú hamburguesa */
+.menu-hamburguesa {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+#menu-toggle {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.menu-content {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.menu-content button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.menu-content button:hover {
+  background: #cc0000;
+}
+
+/* Mostrar el menú cuando se activa */
+.menu-hamburguesa.active .menu-content {
+  display: block;
+}
