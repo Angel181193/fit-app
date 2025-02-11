@@ -289,36 +289,39 @@ function actualizarListaEjercicios() {
 
   //scrip insertar resumen dia 
 
-const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-  const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec'; // La URL de tu API web de Google Apps Script
   
-  const datos = {
-    user: user,
-    fecha_inicio: fecha_inicio,
-    fecha_fin: fecha_fin,
-    ejercicio: ejercicio,
-    grupo: grupo,
-    series_realizadas: series_realizadas
-  };
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(datos)
-    });
-
-    const responseData = await response.text();  // Lee la respuesta completa
-    console.log("Respuesta del servidor:", responseData);
-
-    if (response.ok) {
-      console.log("Datos enviados correctamente");
-    } else {
-      console.log("Hubo un error al enviar los datos");
+  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
+    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+  
+    const datos = {
+      user: user,
+      fecha_inicio: fecha_inicio,
+      fecha_fin: fecha_fin,
+      ejercicio: ejercicio,
+      grupo: grupo,
+      series_realizadas: series_realizadas
+    };
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',  // 🔹 Habilita CORS
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      });
+  
+      const responseData = await response.text();
+      console.log("Respuesta del servidor:", responseData);
+  
+      if (response.ok) {
+        console.log("Datos enviados correctamente");
+      } else {
+        console.log("Hubo un error al enviar los datos");
+      }
+    } catch (error) {
+      console.log("Error al enviar la solicitud:", error);
     }
-  } catch (error) {
-    console.log("Error al enviar la solicitud:", error);
-  }
-};
+  };
+  
