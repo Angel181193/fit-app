@@ -15,6 +15,7 @@ body {
   padding: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 8px;
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del contenedor */
 }
 
 h1, h2 {
@@ -29,6 +30,7 @@ h1, h2 {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 #title {
@@ -252,6 +254,7 @@ h1, h2 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px;
+  width: 200px; /* Ajusta el tamaño del menú para que sea más pequeño en móvil */
 }
 
 .menu-content button {
@@ -273,4 +276,40 @@ h1, h2 {
 /* Mostrar el menú cuando se activa */
 .menu-hamburguesa.active .menu-content {
   display: block;
+}/* Ajustes específicos para móviles */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    align-items: flex-start;
+  }
+  
+  #title {
+    font-size: 20px; /* Reducir tamaño del título en móviles */
+  }
+  
+  .menu-hamburguesa {
+    margin-top: 10px; /* Añadir espacio en el menú hamburguesa en pantallas pequeñas */
+  }
+
+  .container {
+    padding: 10px; /* Reducir el padding en pantallas pequeñas */
+  }
+
+  /* Ajustes para la tabla y otros elementos */
+  .exercise-table {
+    font-size: 12px;
+    width: 100%; /* Asegura que la tabla ocupe el 100% del ancho */
+  }
+  
+  .half-container {
+    width: 100%; /* Asegura que los elementos de la mitad de la pantalla se ajusten en móvil */
+    padding: 0;
+  }
+
+  /* Ajustes adicionales */
+  #select-dia, #timer {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
 }
