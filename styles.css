@@ -27,13 +27,14 @@ h1, h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
+  padding: 10px;
 }
 
 #title {
   font-size: 24px;
   font-weight: bold;
   margin: 0;
+  flex-grow: 1; /* Para que el título ocupe el espacio disponible */
 }
 
 .menu-hamburguesa {
@@ -49,7 +50,6 @@ h1, h2 {
   font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin-left: 15px; /* Agrega espacio entre el título y el menú */
 }
 
 /* Selector de día */
