@@ -288,34 +288,6 @@ function actualizarListaEjercicios() {
   
 
   //scrip insertar resumen dia 
-
-  function insertarResumenActividad(user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('daily');
-    var nuevaFila = hoja.getLastRow() + 1;
-    
-    // Insertar los datos en la hoja
-    hoja.getRange(nuevaFila, 1).setValue(user);  // Columna User
-    hoja.getRange(nuevaFila, 2).setValue(fecha_inicio);  // Columna date_star
-    hoja.getRange(nuevaFila, 3).setValue(fecha_fin);  // Columna date_finish
-    hoja.getRange(nuevaFila, 4).setValue(ejercicio);  // Columna Nombre ejercicio
-    hoja.getRange(nuevaFila, 5).setValue(grupo);  // Columna Grupo
-    hoja.getRange(nuevaFila, 6).setValue(series_realizadas);  // Columna Realizadas
-  }
-  
-  function doPost(e) {
-    var datos = JSON.parse(e.postData.contents);  // Los datos que recibes como JSON
-    var user = datos.user;
-    var fecha_inicio = datos.fecha_inicio;
-    var fecha_fin = datos.fecha_fin;
-    var ejercicio = datos.ejercicio;
-    var grupo = datos.grupo;
-    var series_realizadas = datos.series_realizadas;
-    
-    // Llamar a la función para insertar los datos
-    insertarResumenActividad(user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas);
-    
-    return ContentService.createTextOutput("Datos insertados correctamente");
-  }
   
   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
     const url = 'https://script.google.com/macros/s/AKfycbwZfSM40lZHa81kP_9lh4JXzdySq3CsRCm_9WiUsUE0KNAOkSA4A15N3Zrqb9FMrT7zHw/exec'; // La URL de tu API web de Google Apps Script
