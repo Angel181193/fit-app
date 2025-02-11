@@ -290,7 +290,7 @@ function actualizarListaEjercicios() {
   //scrip insertar resumen dia 
 
 const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-  const url = 'https://script.google.com/macros/s/AKfycbyDWxNxlYhXzEVl8ePXULbSiGsbO-gOSKNd6RHGzW1vMDXYmO94IerOd3CqVU5_e5WM3w/exec'; // La URL de tu API web de Google Apps Script
+  const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec'; // La URL de tu API web de Google Apps Script
   
   const datos = {
     user: user,
