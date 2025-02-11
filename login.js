@@ -9,7 +9,8 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   document.getElementById('mensaje').innerText = "Verificando...";
 
   // Realizamos la solicitud a Google Apps Script para obtener los usuarios
-  fetch("https://script.google.com/macros/s/AKfycbwZfSM40lZHa81kP_9lh4JXzdySq3CsRCm_9WiUsUE0KNAOkSA4A15N3Zrqb9FMrT7zHw/exec")  // Asegúrate de que esta URL esté correcta
+  fetch("https://script.google.com/macros/s/AKfycbx8YqVcGkcqz2XySnfhMqHo8ANWYhDVa3HfNYPmLzgCtFo7dtx5g3965LXlVviTqYZ52g/exec")  // Asegúrate de que esta URL esté correcta
+
     .then(response => response.json())
     .then(users => {
       // Buscamos al usuario válido
