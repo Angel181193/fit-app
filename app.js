@@ -289,37 +289,31 @@ function actualizarListaEjercicios() {
 
   //scrip insertar resumen dia 
 
-  
   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
     const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
-  
+    
     const datos = {
-        User: user,                   // ✅ Coincide con "User"
-        date_star: fecha_inicio,      // ✅ Coincide con "date_star"
-        date_finish: fecha_fin,       // ✅ Coincide con "date_finish"
-        "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
-        Grupo: grupo,                 // ✅ Coincide con "Grupo"
-        Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
-      };      
+      User: user,
+      date_star: fecha_inicio,
+      date_finish: fecha_fin,
+      "Nombre ejercicio": ejercicio,
+      Grupo: grupo,
+      Realizadas: series_realizadas
+    };
   
     try {
       const response = await fetch(url, {
         method: 'POST',
-        mode: 'cors',  // 🔹 Habilita CORS
+        mode: 'no-cors',  // Establece no-cors para deshabilitar CORS
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(datos)
       });
   
-      const responseData = await response.text();
-      console.log("Respuesta del servidor:", responseData);
+      // Con 'no-cors' no puedes acceder a la respuesta, pero el servidor debería recibir la solicitud
+      console.log("Solicitud enviada correctamente");
   
-      if (response.ok) {
-        console.log("Datos enviados correctamente");
-      } else {
-        console.log("Hubo un error al enviar los datos");
-      }
     } catch (error) {
       console.log("Error al enviar la solicitud:", error);
     }
