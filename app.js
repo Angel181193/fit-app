@@ -294,13 +294,13 @@ function actualizarListaEjercicios() {
     const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
   
     const datos = {
-      user: user,
-      fecha_inicio: fecha_inicio,
-      fecha_fin: fecha_fin,
-      ejercicio: ejercicio,
-      grupo: grupo,
-      series_realizadas: series_realizadas
-    };
+        User: user,                   // ✅ Coincide con "User"
+        date_star: fecha_inicio,      // ✅ Coincide con "date_star"
+        date_finish: fecha_fin,       // ✅ Coincide con "date_finish"
+        "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
+        Grupo: grupo,                 // ✅ Coincide con "Grupo"
+        Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
+      };      
   
     try {
       const response = await fetch(url, {
