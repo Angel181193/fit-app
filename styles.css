@@ -126,6 +126,20 @@ h1, h2 {
   background: #218838;
 }
 
+/* Botones de entrenamiento con media pantalla */
+.workout-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#start-workout, #finish-workout {
+  width: 48%;
+  padding: 12px;
+  font-size: 18px;
+  text-align: center;
+}
+
 /* Ajustes para dispositivos pequeños */
 @media (max-width: 600px) {
   .exercise-table {
