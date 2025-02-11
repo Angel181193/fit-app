@@ -1,15 +1,15 @@
 const ejerciciosPorDia = {
   "lunes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Press inclinado con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Press plano con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Prees Militar", "grupo": "Hombro", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Jalón al pecho polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Jalón espalda polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
   ],
   "martes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },
@@ -18,7 +18,7 @@ const ejerciciosPorDia = {
     { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 }
   ],
   "miércoles": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Remo sentado polea", "grupo": "Espalda", "series": 10, "realizadas": 0 },
     { "nombre": "🏋️Remo sentado polea 1 mano", "grupo": "Espalda", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Prees pecho Maquina", "grupo": "pecho", "series": 8, "realizadas": 0 },
@@ -27,7 +27,7 @@ const ejerciciosPorDia = {
     { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
   ],
   "jueves": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },
@@ -36,7 +36,7 @@ const ejerciciosPorDia = {
     { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 }
   ],
   "viernes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Press inclinado con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Press plano con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Prees Militar", "grupo": "Hombro", "series": 8, "realizadas": 0 },
@@ -45,7 +45,7 @@ const ejerciciosPorDia = {
     { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
   ],
   "sábado": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 5, "realizadas": 0 },
+    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
     { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },

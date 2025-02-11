@@ -146,7 +146,7 @@ h1, h2 {
 
 /* Botones de control de series */
 .series-tracker button {
-  background: #007bff;
+  background: #333;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -158,7 +158,7 @@ h1, h2 {
 }
 
 .series-tracker button:hover {
-  background: #0056b3;
+  background: #333;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -168,7 +168,7 @@ h1, h2 {
   width: 100%;
   padding: 12px;
   font-size: 18px;
-  background: #28a745;
+  background: #333;
   color: white;
   border: none;
   border-radius: 6px;
@@ -179,7 +179,7 @@ h1, h2 {
 }
 
 #start-workout:hover, #finish-workout:hover, #auxilio-workout:hover {
-  background: #218838;
+  background: #333;
 }
 
 /* Botones de entrenamiento con media pantalla */
