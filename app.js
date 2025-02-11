@@ -319,10 +319,10 @@ function actualizarListaEjercicios() {
 //       console.log("Error al enviar la solicitud:", error);
 //     }
 //   };
+
 const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
     const url = 'https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec';
   
-
     // Asegúrate de que los nombres de las propiedades coincidan con los que espera el script
     const datos = {
       user: user,
@@ -332,6 +332,8 @@ const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, seri
       grupo: grupo,
       series_realizadas: series_realizadas
     };
+  
+    console.log("Datos enviados:", datos);  // Verificar los datos que se están enviando
   
     try {
       const response = await fetch(url, {
@@ -344,6 +346,8 @@ const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, seri
   
       if (response.ok) {
         console.log("Solicitud enviada correctamente");
+        const responseText = await response.text();  // Leer respuesta en formato texto
+        console.log("Respuesta del servidor:", responseText);
       } else {
         const errorMessage = await response.text();  // Obtener la respuesta en texto
         console.log("Error en la solicitud:", response.status, errorMessage);
