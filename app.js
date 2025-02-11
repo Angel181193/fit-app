@@ -230,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   
     // Finalizar entrenamiento
+    //
     finishButton.addEventListener("click", function () {
         let totalTime = (Date.now() - startTime) / 1000;
         let summaryMessage = "🏋️‍♂️ Resumen del entrenamiento:\n\n";
