@@ -13,19 +13,25 @@
         <button id="logoutButton">Cerrar Sesión</button>
       </div>
     </div>
-  <div class="container">
-    <h1>Rutina GalletoFit</h1>
-    <!-- Selector de día -->
-    <select id="select-dia">
-      <option value="lunes">Lunes</option>
-      <option value="martes">Martes</option>
-      <option value="miércoles">Miércoles</option>
-      <option value="jueves">Jueves</option>
-      <option value="viernes">Viernes</option>
-      <option value="sabado">Sábado</option>
-      <option value="domingo">Domingo</option>
-    </select>
-
+    <div class="time-day-container">
+      <!-- Selector de día -->
+      <div class="half-container">
+        <select id="select-dia">
+          <option value="lunes">Lunes</option>
+          <option value="martes">Martes</option>
+          <option value="miércoles">Miércoles</option>
+          <option value="jueves">Jueves</option>
+          <option value="viernes">Viernes</option>
+          <option value="sabado">Sábado</option>
+          <option value="domingo">Domingo</option>
+        </select>
+      </div>
+    
+      <!-- Tiempo -->
+      <div class="half-container">
+        <p id="timer">Tiempo: 00:00</p>
+      </div>
+    </div>    
     <table class="exercise-table">
       <thead>
         <tr>
