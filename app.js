@@ -289,31 +289,64 @@ function actualizarListaEjercicios() {
 
   //scrip insertar resumen dia 
 
-  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+//   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
+//     const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
     
+//     const datos = {
+//       User: user,
+//       date_star: fecha_inicio,
+//       date_finish: fecha_fin,
+//       "Nombre ejercicio": ejercicio,
+//       Grupo: grupo,
+//       Realizadas: series_realizadas
+//     };
+  
+//     try {
+//       const response = await fetch(url, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(datos)
+//       });
+  
+//       if (response.ok) {
+//         console.log("Solicitud enviada correctamente");
+//       } else {
+//         console.log("Error en la solicitud:", response.status);
+//       }
+//     } catch (error) {
+//       console.log("Error al enviar la solicitud:", error);
+//     }
+//   };
+const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
+    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+  
+    // Asegúrate de que los nombres de las propiedades coincidan con los que espera el script
     const datos = {
-      User: user,
-      date_star: fecha_inicio,
-      date_finish: fecha_fin,
-      "Nombre ejercicio": ejercicio,
-      Grupo: grupo,
-      Realizadas: series_realizadas
+      user: user,
+      fecha_inicio: fecha_inicio,
+      fecha_fin: fecha_fin,
+      ejercicio: ejercicio,
+      grupo: grupo,
+      series_realizadas: series_realizadas
     };
   
     try {
       const response = await fetch(url, {
         method: 'POST',
-        mode: 'no-cors',  // Establece no-cors para deshabilitar CORS
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(datos)
       });
   
-      // Con 'no-cors' no puedes acceder a la respuesta, pero el servidor debería recibir la solicitud
-      console.log("Solicitud enviada correctamente");
-  
+      if (response.ok) {
+        console.log("Solicitud enviada correctamente");
+      } else {
+        const errorMessage = await response.text();  // Obtener la respuesta en texto
+        console.log("Error en la solicitud:", response.status, errorMessage);
+      }
     } catch (error) {
       console.log("Error al enviar la solicitud:", error);
     }
