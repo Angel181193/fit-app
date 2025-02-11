@@ -276,11 +276,14 @@ h1, h2 {
 /* Mostrar el menú cuando se activa */
 .menu-hamburguesa.active .menu-content {
   display: block;
-}/* Ajustes específicos para móviles */
+
+}
+
+/* Ajustes para dispositivos pequeños */
 @media (max-width: 600px) {
   .header-container {
-    flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
-    align-items: flex-start;
+    flex-direction: row; /* Cambiado a fila en lugar de columna */
+    align-items: center; /* Alineación vertical centrada */
   }
   
   #title {
@@ -288,7 +291,7 @@ h1, h2 {
   }
   
   .menu-hamburguesa {
-    margin-top: 10px; /* Añadir espacio en el menú hamburguesa en pantallas pequeñas */
+    margin-left: 10px; /* Añadir margen izquierdo para separar del título */
   }
 
   .container {
@@ -312,4 +315,4 @@ h1, h2 {
     padding: 8px;
     font-size: 14px;
   }
-}
+} 
