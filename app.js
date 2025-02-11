@@ -112,16 +112,12 @@ function actualizarListaEjercicios() {
     }, 1000);
   }
   
-// Función para finalizar el entrenamiento
-
-function finalizarEntrenamiento() {
+  // Función para finalizar el entrenamiento
+  function finalizarEntrenamiento() {
     clearInterval(timer);
     timerDisplay.innerText += " (Finalizado)";
     finishWorkoutBtn.style.display = "none";
-
-    // Llamar a la función para enviar los datos cuando finaliza el entrenamiento
-    enviarDatos();
-}
+  }
   
   // Verifica si los ejercicios están completos y habilita/deshabilita los checkboxes
   function verificarCompletados() {
@@ -293,60 +289,39 @@ function finalizarEntrenamiento() {
 
   //scrip insertar resumen dia 
 
-//   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-//     const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
-    
-//     const datos = {
-//       User: user,
-//       date_star: fecha_inicio,
-//       date_finish: fecha_fin,
-//       "Nombre ejercicio": ejercicio,
-//       Grupo: grupo,
-//       Realizadas: series_realizadas
-//     };
   
-//     try {
-//       const response = await fetch(url, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(datos)
-//       });
+  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
+    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
   
-//       if (response.ok) {
-//         console.log("Solicitud enviada correctamente");
-//       } else {
-//         console.log("Error en la solicitud:", response.status);
-//       }
-//     } catch (error) {
-//       console.log("Error al enviar la solicitud:", error);
-//     }
-//   };
-// Función para enviar los datos al finalizar el entrenamiento
-
-function enviarDatos() {
-    // Recopilar los datos del entrenamiento
-    const ejerciciosCompletados = [];
-    const diaSeleccionado = selectDia.value;
-    const ejercicios = ejerciciosPorDia[diaSeleccionado];
-
-    // Recopilamos los ejercicios con las series realizadas
-    ejercicios.forEach((ejercicio, index) => {
-        const seriesEl = document.getElementById(`series-${index}`);
-        const series = parseInt(seriesEl.innerText);
-        if (series > 0) {
-            ejerciciosCompletados.push({
-                nombre: ejercicio.nombre,
-                grupo: ejercicio.grupo,
-                seriesRealizadas: series,
-            });
-        }
-    });
-
-    // Enviar los datos a donde sea necesario (puedes hacer una llamada a una API o almacenarlos)
-    console.log("Ejercicios completados:", ejerciciosCompletados);
-    // Aquí iría el código para enviar los datos (por ejemplo, usando fetch o axios)
-}
-
-
+    const datos = {
+        User: user,                   // ✅ Coincide con "User"
+        date_star: fecha_inicio,      // ✅ Coincide con "date_star"
+        date_finish: fecha_fin,       // ✅ Coincide con "date_finish"
+        "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
+        Grupo: grupo,                 // ✅ Coincide con "Grupo"
+        Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
+      };      
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',  // 🔹 Habilita CORS
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      });
+  
+      const responseData = await response.text();
+      console.log("Respuesta del servidor:", responseData);
+  
+      if (response.ok) {
+        console.log("Datos enviados correctamente");
+      } else {
+        console.log("Hubo un error al enviar los datos");
+      }
+    } catch (error) {
+      console.log("Error al enviar la solicitud:", error);
+    }
+  };
+  
