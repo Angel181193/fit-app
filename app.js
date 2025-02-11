@@ -270,4 +270,19 @@ function actualizarListaEjercicios() {
     });
   
   });
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuContent = document.querySelector(".menu-content");
+  
+    menuToggle.addEventListener("click", function () {
+      menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
+    });
+  
+    // Cerrar el menú si se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+      if (!menuToggle.contains(event.target) && !menuContent.contains(event.target)) {
+        menuContent.style.display = "none";
+      }
+    });
+  });
   
