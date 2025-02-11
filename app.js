@@ -72,13 +72,14 @@ const timerDisplay = document.getElementById("timer");
 let timer;
 let seconds = 0;
 
+// Función para actualizar la lista de ejercicios
 function actualizarListaEjercicios() {
-    const diaSeleccionado = selectDia.value;
-    const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
-  
-    listaEjercicios.innerHTML = "";
-    ejercicios.forEach((ejercicio, index) => {
-        const row = document.createElement("tr");  
+  const diaSeleccionado = selectDia.value;
+  const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
+
+  listaEjercicios.innerHTML = "";
+  ejercicios.forEach((ejercicio, index) => {
+      const row = document.createElement("tr");
 
       row.innerHTML = `
           <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
@@ -113,30 +114,32 @@ function iniciarEntrenamiento() {
 
 // Función para finalizar el entrenamiento
 function finalizarEntrenamiento() {
-    clearInterval(timer);
-    timerDisplay.innerText += " (Finalizado)";
-    finishWorkoutBtn.style.display = "none";
-  }
+  clearInterval(timer);
+  timerDisplay.innerText += " (Finalizado)";
+  finishWorkoutBtn.style.display = "none";
+}
 
 // Verifica si los ejercicios están completos y habilita/deshabilita los checkboxes
 function verificarCompletados() {
-    const checkboxes = document.querySelectorAll(".checkbox");
-    const todosMarcados = [...checkboxes].every(chk => chk.checked);
+  const checkboxes = document.querySelectorAll(".checkbox");
 
-    finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
-}
+  checkboxes.forEach((checkbox, index) => {
+      const seriesEl = document.getElementById(`series-${index}`);
+      const series = parseInt(seriesEl.innerText);
+      const ejercicio = ejerciciosPorDia[selectDia.value][index];
+
       // Si el número de series realizadas es suficiente, habilitamos el checkbox
       if (series >= ejercicio.series) {
           checkbox.disabled = false;
       } else {
           checkbox.disabled = true;
       }
-  ;
+  });
 
   // Verificar si todos los ejercicios están completos para mostrar el botón de finalizar
   const todosMarcados = [...checkboxes].every(chk => chk.checked);
   finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
-
+}
 
 // Función para restar series
 function restarSerie(index) {
@@ -182,56 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 });
-document.addEventListener("DOMContentLoaded", function () {
-  // Variables
-  const selectDia = document.getElementById("select-dia");
-  const listaEjercicios = document.getElementById("ejercicios-lista");
-  const startWorkoutBtn = document.getElementById("start-workout");
-  const finishWorkoutBtn = document.getElementById("finish-workout");
-  const timerDisplay = document.getElementById("timer");
-  const auxilioButton = document.getElementById("auxilio-workout");
-  const logoutButton = document.getElementById("logoutButton");
-
-  // Variables de temporizador
-  let timer;
-  let seconds = 0;
-
-  // Función para actualizar la lista de ejercicios
-  function actualizarListaEjercicios() {
-      const diaSeleccionado = selectDia.value;
-      const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
-
-      listaEjercicios.innerHTML = "";
-      ejercicios.forEach((ejercicio, index) => {
-          const row = document.createElement("tr");
-
-          row.innerHTML = `
-              <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
-              <td>${ejercicio.nombre}</td>
-              <td>${ejercicio.grupo}</td>
-              <td>${ejercicio.series}</td>
-              <td class="series-tracker">
-                  <button onclick="restarSerie(${index})">-</button>
-                  <span id="series-${index}">${ejercicio.realizadas}</span>
-                  <button onclick="sumarSerie(${index})">+</button>
-              </td>
-          `;
-          listaEjercicios.appendChild(row);
-      });
-
-      verificarCompletados();
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const startButton = document.getElementById("start-workout");
-    const finishButton = document.getElementById("finish-workout");
-    const exerciseTable = document.getElementById("ejercicios-lista");
-    const timerDisplay = document.getElementById("timer");
-    
-    let startTime;
-    let exerciseTimes = [];
-    let lastCompletionTime = null;
-
     // Iniciar entrenamiento
     startButton.addEventListener("click", function () {
         startTime = Date.now();
@@ -265,54 +218,21 @@ exerciseTable.addEventListener("change", function (event) {
     }
 });
 
+finishButton.addEventListener("click", function () {
+    let totalTime = (Date.now() - startTime) / 1000;
+    let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
 
-    // Finalizar entrenamiento
-    finishButton.addEventListener("click", function () {
-        let totalTime = (Date.now() - startTime) / 1000;
-        let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+    if (exerciseTimes.length === 0) {
+        summaryMessage += "❌ No completaste ningún ejercicio.";
+    } else {
+        // Aquí recorremos cada ejercicio y mostramos su nombre
+        exerciseTimes.forEach((time, index) => {
+            const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+            summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+        });
+        summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+    }
 
-        if (exerciseTimes.length === 0) {
-            summaryMessage += "❌ No completaste ningún ejercicio.";
-        } else {
-            exerciseTimes.forEach((time, index) => {
-                summaryMessage += `Ejercicio ${index + 1}: ${time.toFixed(2)} segundos\n`;
-            });
-            summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
-        }
-
-        alert(summaryMessage);
-        window.location.reload();
-    });
-});
-
-  // Temporizador de visibilidad
-  let startTime = Date.now();  
-  let elapsedTime = 0;         
-  let timerInterval;
-
-  function startTimer() {
-      timerInterval = setInterval(function () {
-          elapsedTime = Date.now() - startTime;
-          updateTimerDisplay(elapsedTime);
-      }, 1000);
-  }
-
-  function updateTimerDisplay(elapsedTime) {
-      const seconds = Math.floor(elapsedTime / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const formattedTime = `${hours}:${minutes % 60}:${seconds % 60}`;
-      document.getElementById("timer").textContent = formattedTime;
-  }
-
-  document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-          clearInterval(timerInterval);
-      } else {
-          startTime = Date.now() - elapsedTime;
-          startTimer();
-      }
-  });
-
-  startTimer(); // Iniciar temporizador cuando se cargue la app
+    alert(summaryMessage);
+    window.location.reload();
 });
