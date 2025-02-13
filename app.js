@@ -1,9 +1,49 @@
+// Evento para cuando se carga la página
+document.addEventListener("DOMContentLoaded", function () {
+  // Recuperar el usuario logueado desde localStorage
+  const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado'));
+
+  // Verificar si el usuario está disponible
+  if (!usuarioLogueado || !usuarioLogueado.Usuario) {
+    console.error("Usuario no encontrado en localStorage.");
+    return;  // Detener la ejecución si no se encuentra el usuario
+  }
+
+  // Cuando se carga la página, obtener los ejercicios y organizarlos por día
+  obtenerEjercicios(usuarioLogueado.Usuario).then((ejerciciosDelUsuario) => {
+    // Organizar los ejercicios por día
+    ejerciciosPorDia = {}; // Resetear la variable para evitar duplicados si ya existía
+    ejerciciosDelUsuario.forEach((ejercicio) => {
+      if (!ejerciciosPorDia[ejercicio.Dia]) {
+        ejerciciosPorDia[ejercicio.Dia] = [];
+      }
+      ejerciciosPorDia[ejercicio.Dia].push({
+        nombre: ejercicio["Nombre ejercicio"],
+        grupo: ejercicio.Grupo,
+        series: ejercicio.Series,
+        realizadas: ejercicio.Realizadas,
+      });
+    });
+
+    // Llenar el select con los días
+    for (const dia in ejerciciosPorDia) {
+      const option = document.createElement("option");
+      option.value = dia;
+      option.textContent = dia;
+      selectDia.appendChild(option);
+    }
+
+    // Actualizar la lista de ejercicios con el día seleccionado
+    selectDia.addEventListener("change", () => actualizarListaEjercicios());
+    actualizarListaEjercicios(); // Mostrar los ejercicios del primer día seleccionado
+  }).catch(error => {
+    console.log("Error al obtener los ejercicios:", error);
+  });
+});
+
+// Función para obtener los ejercicios
 const obtenerEjercicios = async (usuario) => {
   const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
-
-  const params = {
-    user: usuario
-  };
 
   try {
     const response = await fetch(url + "?user=" + usuario);
@@ -54,7 +94,6 @@ function actualizarListaEjercicios() {
 
   verificarCompletados();
 }
-
 // Cuando se carga la página, obtener los ejercicios y organizarlos por día
 document.addEventListener("DOMContentLoaded", function () {
   const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')).Usuario;
@@ -90,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-  
   // aqui todo igual Función para iniciar el entrenamiento
   function iniciarEntrenamiento() {
     clearInterval(timer);
