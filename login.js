@@ -22,11 +22,12 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
       if (validUser) {
         // Guardamos el usuario logueado en localStorage solo si es válido
         localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
+        console.log("Usuario guardado en localStorage", validUser); // Verifica que el usuario está guardado
         window.location.href = "index.html";  // Redirige a la app principal
       } else {
         // Si el usuario o la clave no son correctos
         document.getElementById('mensaje').innerText = "Usuario o clave incorrectos.";
-      }
+      }      
     })
     .catch(error => {
       console.error("Error al obtener datos:", error);

@@ -24,25 +24,36 @@
       event.preventDefault(); // Evitar que se recargue la página
 
       // Obtenemos los valores de usuario y clave
-      const usuario = document.getElementById('usuario').value.trim(); // "usuario" en minúsculas
-      const clave = document.getElementById('clave').value.trim(); // "clave" en minúsculas
+      const usuario = document.getElementById('usuario').value.trim();
+      const clave = document.getElementById('clave').value.trim();
 
       console.log("Usuario:", usuario); // Debug
       console.log("Clave:", clave); // Debug
 
-      // Verificamos si las credenciales son correctas
-      if ((usuario === 'Angel' && clave === '123') || (usuario === 'Lucia' && clave === '1234')) {
-        const userToken = "token_de_usuario"; // Simulamos un token de usuario
+      // Hacemos la solicitud a Google Apps Script para obtener los usuarios
+      fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")
+        .then(response => response.json())
+        .then(users => {
+          // Buscamos al usuario con las credenciales ingresadas
+          const validUser = users.find(user =>
+            user.Usuario.trim().toLowerCase() === usuario.toLowerCase() && user.Clave.trim() === clave
+          );
 
-        // Guardamos el token en localStorage
-        localStorage.setItem("userToken", userToken);
+          if (validUser) {
+            // Si encontramos al usuario válido, guardamos el usuario en localStorage
+            localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
 
-        // Redirigimos a la página de ejercicios
-        window.location.href = "index.html";
-      } else {
-        // Si el login falla
-        document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
-      }
+            // Redirigimos a la página de ejercicios
+            window.location.href = "index.html";
+          } else {
+            // Si las credenciales son incorrectas
+            document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
+          }
+        })
+        .catch(error => {
+          console.error("Error al obtener usuarios:", error);
+          document.getElementById('mensaje').textContent = "Error al conectar con el servidor.";
+        });
     });
   </script>
 </body>
