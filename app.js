@@ -94,42 +94,8 @@ function actualizarListaEjercicios() {
 
   verificarCompletados();
 }
-// Cuando se carga la página, obtener los ejercicios y organizarlos por día
-document.addEventListener("DOMContentLoaded", function () {
-  const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')).Usuario;
 
-  obtenerEjercicios(usuarioLogueado).then((ejerciciosDelUsuario) => {
-    // Organizar los ejercicios por día
-    ejerciciosPorDia = {}; // Resetear la variable para evitar duplicados si ya existía
-    ejerciciosDelUsuario.forEach((ejercicio) => {
-      if (!ejerciciosPorDia[ejercicio.Dia]) {
-        ejerciciosPorDia[ejercicio.Dia] = [];
-      }
-      ejerciciosPorDia[ejercicio.Dia].push({
-        nombre: ejercicio["Nombre ejercicio"],
-        grupo: ejercicio.Grupo,
-        series: ejercicio.Series,
-        realizadas: ejercicio.Realizadas,
-      });
-    });
-
-    // Llenar el select con los días
-    for (const dia in ejerciciosPorDia) {
-      const option = document.createElement("option");
-      option.value = dia;
-      option.textContent = dia;
-      selectDia.appendChild(option);
-    }
-
-    // Actualizar la lista de ejercicios con el día seleccionado
-    selectDia.addEventListener("change", () => actualizarListaEjercicios());
-    actualizarListaEjercicios(); // Mostrar los ejercicios del primer día seleccionado
-  }).catch(error => {
-    console.log("Error al obtener los ejercicios:", error);
-  });
-});
-
-  // aqui todo igual Función para iniciar el entrenamiento
+  // aqui TODO igual Función para iniciar el entrenamiento
   function iniciarEntrenamiento() {
     clearInterval(timer);
     seconds = 0;
