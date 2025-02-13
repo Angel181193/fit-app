@@ -8,7 +8,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   // Mostrar mensaje de "verificando"
   document.getElementById('mensaje').innerText = "Verificando...";
 
-  // Realizamos la solicitud a Google Apps Script para obtener los usuarios
+  // Realizamos la solicitud a Google Apps Script para obtener los usuariosff
 
 fetch("https://script.google.com/macros/s/AKfycbzSu9fAB2XNn8_TvXbR87l9uztYle0ashVqElSgWD2k02DXu4xrEfjfvc6hZgK6MsiDNg/exec")
   .then(response => response.json())
