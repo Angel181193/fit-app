@@ -290,34 +290,32 @@ function actualizarListaEjercicios() {
     const url = 'https://script.google.com/macros/s/AKfycbzSu9fAB2XNn8_TvXbR87l9uztYle0ashVqElSgWD2k02DXu4xrEfjfvc6hZgK6MsiDNg/exec';
   
     const datos = {
-        User: user,                   // ✅ Coincide con "User"
-        date_star: fecha_inicio,      // ✅ Coincide con "date_star"
-        date_finish: fecha_fin,       // ✅ Coincide con "date_finish"
-        "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
-        Grupo: grupo,                 // ✅ Coincide con "Grupo"
-        Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
-      };      
+      User: user,
+      date_star: fecha_inicio,
+      date_finish: fecha_fin,
+      "Nombre ejercicio": ejercicio,
+      Grupo: grupo,
+      Realizadas: series_realizadas
+    };
   
     try {
       const response = await fetch(url, {
         method: 'POST',
-        mode: 'cors',  // 🔹 Habilita CORS
+        mode: 'cors',  // Asegúrate de que el servidor permita CORS
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(datos)
       });
   
-      const responseData = await response.text();
-      console.log("Respuesta del servidor:", responseData);
-  
-      if (response.ok) {
-        console.log("Datos enviados correctamente");
-      } else {
-        console.log("Hubo un error al enviar los datos");
+      if (!response.ok) {
+        throw new Error('Error al enviar datos');
       }
+  
+      const data = await response.json();
+      console.log("Datos enviados correctamente:", data);
     } catch (error) {
-      console.log("Error al enviar la solicitud:", error);
+      console.error("Error al enviar los datos:", error);
     }
   };
   
