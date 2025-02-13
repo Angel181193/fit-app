@@ -1,104 +1,97 @@
-const ejerciciosPorDia = {
-  "lunes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Press inclinado con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Press plano con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Prees Militar", "grupo": "Hombro", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Jalón al pecho polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Jalón espalda polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-  ],
-  "martes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Pres frances pie", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 }
-  ],
-  "miércoles": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Remo sentado polea", "grupo": "Espalda", "series": 10, "realizadas": 0 },
-    { "nombre": "🏋️Remo sentado polea 1 mano", "grupo": "Espalda", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Prees pecho Maquina", "grupo": "pecho", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Press hombro Maquina", "grupo": "Hombro", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Aperturas maquina espalda", "grupo": "espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
-  ],
-  "jueves": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Pres frances pie", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 }
-  ],
-  "viernes": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Press inclinado con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Press plano con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Prees Militar", "grupo": "Hombro", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️alón al pecho polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Jalón espalda polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
-  ],
-  "sábado": [
-    { "nombre": "🏃Correr", "grupo": "HIT", "series": 1, "realizadas": 0 },
-    { "nombre": "🏋️Extension polea triceps", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl con polea 1 mano", "grupo": "Bíceps", "series": 5, "realizadas": 0 },
-    { "nombre": "🏋️Pres frances pie", "grupo": "triceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Curl concentrado con mancuerna", "grupo": "Bíceps", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 }
-  ],
-  "domingo": [
-    { "nombre": "🏋️Sentadillas con mancuernas", "grupo": "Pierna", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Zancadas con mancuernas", "grupo": "Pierna", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Elevación de talones", "grupo": "Pierna", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Sentadillas abrir cerrar", "grupo": "Pierna", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Zancadas HIT", "grupo": "Pierna", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️Abdomen", "grupo": "Abdomen", "series": 5, "realizadas": 0 },
-  ]
+const obtenerEjercicios = async (usuario) => {
+  const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+
+  const params = {
+    user: usuario
+  };
+
+  try {
+    const response = await fetch(url + "?user=" + usuario);
+    const data = await response.json();
+    
+    if (response.ok) {
+      return data; // Devolver los ejercicios de este usuario
+    } else {
+      throw new Error('Error al obtener ejercicios');
+    }
+  } catch (error) {
+    console.log("Error al obtener los ejercicios:", error);
+  }
 };
 
-  const selectDia = document.getElementById("select-dia");
-  const listaEjercicios = document.getElementById("ejercicios-lista");
-  const startWorkoutBtn = document.getElementById("start-workout");
-  const finishWorkoutBtn = document.getElementById("finish-workout");
-  const timerDisplay = document.getElementById("timer");
-  
-  let timer;
-  let seconds = 0;
-  
+const selectDia = document.getElementById("select-dia");
+const listaEjercicios = document.getElementById("ejercicios-lista");
+const startWorkoutBtn = document.getElementById("start-workout");
+const finishWorkoutBtn = document.getElementById("finish-workout");
+const timerDisplay = document.getElementById("timer");
+
+let timer;
+let seconds = 0;
+let ejerciciosPorDia = {}; // Definir la variable que organizará los ejercicios por día
+
 // Función para actualizar la lista de ejercicios
 function actualizarListaEjercicios() {
-    const diaSeleccionado = selectDia.value;
-    const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
-  
-    listaEjercicios.innerHTML = "";
-    ejercicios.forEach((ejercicio, index) => {
-        const row = document.createElement("tr");
-  
-        row.innerHTML = `
-            <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
-            <td>${ejercicio.nombre}</td>
-            <td>${ejercicio.grupo}</td>
-            <td>${ejercicio.series}</td>
-            <td class="series-tracker">
-                <button onclick="restarSerie(${index})">-</button>
-                <span id="series-${index}">${ejercicio.realizadas}</span>
-                <button onclick="sumarSerie(${index})">+</button>
-            </td>
-        `;
-        listaEjercicios.appendChild(row);
+  const diaSeleccionado = selectDia.value;
+  const ejercicios = ejerciciosPorDia[diaSeleccionado] || [];
+
+  listaEjercicios.innerHTML = "";
+  ejercicios.forEach((ejercicio, index) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+          <td><input type="checkbox" id="ejercicio-${index}" class="checkbox" onchange="verificarCompletados()"></td>
+          <td>${ejercicio.nombre}</td>
+          <td>${ejercicio.grupo}</td>
+          <td>${ejercicio.series}</td>
+          <td class="series-tracker">
+              <button onclick="restarSerie(${index})">-</button>
+              <span id="series-${index}">${ejercicio.realizadas}</span>
+              <button onclick="sumarSerie(${index})">+</button>
+          </td>
+      `;
+      listaEjercicios.appendChild(row);
+  });
+
+  verificarCompletados();
+}
+
+// Cuando se carga la página, obtener los ejercicios y organizarlos por día
+document.addEventListener("DOMContentLoaded", function () {
+  const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')).Usuario;
+
+  obtenerEjercicios(usuarioLogueado).then((ejerciciosDelUsuario) => {
+    // Organizar los ejercicios por día
+    ejerciciosPorDia = {}; // Resetear la variable para evitar duplicados si ya existía
+    ejerciciosDelUsuario.forEach((ejercicio) => {
+      if (!ejerciciosPorDia[ejercicio.Dia]) {
+        ejerciciosPorDia[ejercicio.Dia] = [];
+      }
+      ejerciciosPorDia[ejercicio.Dia].push({
+        nombre: ejercicio["Nombre ejercicio"],
+        grupo: ejercicio.Grupo,
+        series: ejercicio.Series,
+        realizadas: ejercicio.Realizadas,
+      });
     });
+
+    // Llenar el select con los días
+    for (const dia in ejerciciosPorDia) {
+      const option = document.createElement("option");
+      option.value = dia;
+      option.textContent = dia;
+      selectDia.appendChild(option);
+    }
+
+    // Actualizar la lista de ejercicios con el día seleccionado
+    selectDia.addEventListener("change", () => actualizarListaEjercicios());
+    actualizarListaEjercicios(); // Mostrar los ejercicios del primer día seleccionado
+  }).catch(error => {
+    console.log("Error al obtener los ejercicios:", error);
+  });
+});
+
   
-    verificarCompletados();
-  }
-  
-  // Función para iniciar el entrenamiento
+  // aqui todo igual Función para iniciar el entrenamiento
   function iniciarEntrenamiento() {
     clearInterval(timer);
     seconds = 0;
