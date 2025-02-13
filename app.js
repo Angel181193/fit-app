@@ -267,75 +267,68 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   
-  // Función para enviar datos a Google Sheets
-  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-      const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
-  
-      const datos = {
-          user: user,                     // Mantén la misma clave que en Postman
-          fecha_inicio: fecha_inicio,     // Fecha de inicio del ejercicio
-          fecha_fin: fecha_fin,           // Fecha de finalización del ejercicio
-          ejercicio: ejercicio,           // Nombre del ejercicio
-          grupo: grupo || "Sin grupo",    // Evita errores si grupo no está definido
-          series_realizadas: series_realizadas // Número de series realizadas
-      };
-  
-      console.log("Enviando datos:", datos); // Ver qué datos se están enviando
-  
-      try {
-          const response = await fetch(url, {
-              method: 'POST',
-              mode: 'cors',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(datos)
+  // Detectar el botón de finalizar entrenamiento
+finishButton.addEventListener("click", async function () {
+  let totalTime = (Date.now() - startTime) / 1000;
+  let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+
+  let ejerciciosRealizados = [];
+
+  if (exerciseTimes.length === 0) {
+      summaryMessage += "❌ No completaste ningún ejercicio.";
+  } else {
+      // Recorrer los ejercicios realizados
+      exerciseTimes.forEach((time, index) => {
+          const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+          summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+
+          // Guardar datos para enviar a Google Sheets
+          ejerciciosRealizados.push({
+              user: "Juan Pérez", // Puedes reemplazarlo con el usuario actual si lo tienes dinámico
+              fecha_inicio: new Date().toISOString(),
+              fecha_fin: new Date(Date.now() + time * 1000).toISOString(),
+              ejercicio: ejercicio.nombre,
+              grupo: ejercicio.grupo,
+              series_realizadas: 4 // Puedes hacer que esto sea dinámico si tienes datos reales
           });
-  
-          const responseData = await response.text();
-          console.log("Respuesta del servidor:", responseData);
-  
-          if (response.ok) {
-              console.log("✅ Datos enviados correctamente a Google Sheets.");
-          } else {
-              console.log("⚠️ Hubo un error al enviar los datos.");
-          }
-      } catch (error) {
-          console.log("❌ Error al enviar la solicitud:", error);
-      }
-  };
-  
-  // Finalizar entrenamiento
-  finishButton.addEventListener("click", function () {
-      let totalTime = (Date.now() - startTime) / 1000;
-      let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
-  
-      if (exerciseTimes.length === 0) {
-          summaryMessage += "❌ No completaste ningún ejercicio.";
-      } else {
-          exerciseTimes.forEach((time, index) => {
-              const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
-  
-              summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
-  
-              // Enviar datos del ejercicio a Google Sheets
-              enviarDatos(
-                  "Juan Pérez",  // Puedes hacer esto dinámico si el usuario cambia
-                  new Date().toISOString(), // Fecha de inicio
-                  new Date().toISOString(), // Fecha de fin
-                  ejercicio.nombre,
-                  ejercicio.grupo,  // Asegúrate de que esta propiedad existe
-                  4  // Ajusta el número de series si es necesario
-              );
-          });
-  
-          summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
-      }
-  
-      alert(summaryMessage);
-  
-      // Esperar un poco antes de recargar para asegurar el envío de datos
-      setTimeout(() => {
-          window.location.reload();
-      }, 1500);
+      });
+
+      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+  }
+
+  // Mostrar el popup resumen
+  alert(summaryMessage);
+
+  // Enviar datos a Google Sheets
+  for (const datos of ejerciciosRealizados) {
+      await enviarDatos(datos);
+  }
+
+  // Recargar la página después de enviar los datos
+  window.location.reload();
 });
+
+// 📌 Función para enviar datos a Google Sheets
+const enviarDatos = async (datos) => {
+  const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+
+  try {
+      const response = await fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+      });
+
+      const responseData = await response.text();
+      console.log("📩 Respuesta del servidor:", responseData);
+
+      if (response.ok) {
+          console.log("✅ Datos enviados correctamente");
+      } else {
+          console.error("⚠️ Hubo un error al enviar los datos");
+      }
+  } catch (error) {
+      console.error("❌ Error al enviar la solicitud:", error);
+  }
+};
