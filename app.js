@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para obtener los ejercicios
 const obtenerEjercicios = async (usuario) => {
-  const url = 'https://script.google.com/macros/s/AKfycbwIHut9rfmxNIOgrDyprG3H1OwdiErOR7DR7WsNZuqoN09axngTM2MnwnzK1UvqXzGKaw/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbyF4mnCsMpXSwxFfMyHnjI6axYnPwlaCp6wa8QUOoLGJKUinwlVQzM0hRfkln2HVNhqBA';
 
   try {
     const response = await fetch(url + "?user=" + usuario);
@@ -287,7 +287,7 @@ function actualizarListaEjercicios() {
   //scrip insertar resumen dia 
 
   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-    const url = 'https://script.google.com/macros/s/AKfycbwIHut9rfmxNIOgrDyprG3H1OwdiErOR7DR7WsNZuqoN09axngTM2MnwnzK1UvqXzGKaw/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbyF4mnCsMpXSwxFfMyHnjI6axYnPwlaCp6wa8QUOoLGJKUinwlVQzM0hRfkln2HVNhqBA';
   
     const datos = {
       User: user,
