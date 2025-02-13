@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
   // Realizamos la solicitud a Google Apps Script para obtener los usuariosff
 
-  fetch('https://script.google.com/macros/s/AKfycbwIHut9rfmxNIOgrDyprG3H1OwdiErOR7DR7WsNZuqoN09axngTM2MnwnzK1UvqXzGKaw/exec?user=Angel')
+  fetch('https://script.google.com/macros/s/AKfycbyF4mnCsMpXSwxFfMyHnjI6axYnPwlaCp6wa8QUOoLGJKUinwlVQzM0hRfkln2HVNhqBA/exec')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
