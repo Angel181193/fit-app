@@ -10,7 +10,6 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
   // Realizamos la solicitud a Google Apps Script para obtener los usuarios
   fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")  // Asegúrate de que esta URL esté correcta
-
     .then(response => response.json())
     .then(users => {
       // Buscamos al usuario válido
@@ -21,7 +20,8 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
       // Si encontramos un usuario válido, redirigimos
       if (validUser) {
-        localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));  // Guardamos el usuario logueado en localStorage
+        // Guardamos el usuario logueado en localStorage solo si es válido
+        localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
         window.location.href = "index.html";  // Redirige a la app principal
       } else {
         // Si el usuario o la clave no son correctos
@@ -33,10 +33,3 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
       document.getElementById('mensaje').innerText = "Error al conectar con el servidor.";
     });
 });
-
-// Guardar usuario en localStorage al loguearse NUEVO!!!!!
-const usuarioLogueado = {
-  Usuario: "nombre_del_usuario",
-  // Otros datos del usuario
-};
-localStorage.setItem('usuarioLogueado', JSON.stringify(usuarioLogueado));
