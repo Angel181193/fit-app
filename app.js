@@ -267,68 +267,81 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   
-  // Detectar el botón de finalizar entrenamiento
-finishButton.addEventListener("click", async function () {
+  // Función para finalizar entrenamiento y mostrar resumen
+finishButton.addEventListener("click", function () {
   let totalTime = (Date.now() - startTime) / 1000;
   let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
 
-  let ejerciciosRealizados = [];
-
   if (exerciseTimes.length === 0) {
-      summaryMessage += "❌ No completaste ningún ejercicio.";
+    summaryMessage += "❌ No completaste ningún ejercicio.";
   } else {
-      // Recorrer los ejercicios realizados
-      exerciseTimes.forEach((time, index) => {
-          const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
-          summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
-
-          // Guardar datos para enviar a Google Sheets
-          ejerciciosRealizados.push({
-              user: "Juan Pérez", // Puedes reemplazarlo con el usuario actual si lo tienes dinámico
-              fecha_inicio: new Date().toISOString(),
-              fecha_fin: new Date(Date.now() + time * 1000).toISOString(),
-              ejercicio: ejercicio.nombre,
-              grupo: ejercicio.grupo,
-              series_realizadas: 4 // Puedes hacer que esto sea dinámico si tienes datos reales
-          });
-      });
-
-      summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
+    // Aquí recorremos cada ejercicio y mostramos su nombre
+    exerciseTimes.forEach((time, index) => {
+      const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+      summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+    });
+    summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
   }
 
-  // Mostrar el popup resumen
+  // Mostrar el resumen en un popup
   alert(summaryMessage);
 
-  // Enviar datos a Google Sheets
-  for (const datos of ejerciciosRealizados) {
-      await enviarDatos(datos);
-  }
+  // Enviar los datos a Google Sheets
+  sendDataToGoogleSheets("Juan Pérez", "2025-02-10T10:00:00", "2025-02-10T11:00:00", "Press de banca", "Pectorales", 4);
 
-  // Recargar la página después de enviar los datos
+  // Recargar la página (esto lo puedes eliminar si no es necesario)
   window.location.reload();
 });
 
-// 📌 Función para enviar datos a Google Sheets
-const enviarDatos = async (datos) => {
+// Función para enviar los datos a Google Sheets
+const sendDataToGoogleSheets = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
   const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
 
+  const datos = {
+    User: user,                  // ✅ Coincide con "User"
+    date_star: fecha_inicio,     // ✅ Coincide con "date_star"
+    date_finish: fecha_fin,      // ✅ Coincide con "date_finish"
+    "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
+    Grupo: grupo,                // ✅ Coincide con "Grupo"
+    Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
+  };
+
   try {
-      const response = await fetch(url, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(datos)
-      });
+    const response = await fetch(url, {
+      method: 'POST',
+      mode: 'cors', // 🔹 Habilita CORS
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datos)
+    });
 
-      const responseData = await response.text();
-      console.log("📩 Respuesta del servidor:", responseData);
+    const responseData = await response.text();
+    console.log("Respuesta del servidor:", responseData);
 
-      if (response.ok) {
-          console.log("✅ Datos enviados correctamente");
-      } else {
-          console.error("⚠️ Hubo un error al enviar los datos");
-      }
+    if (response.ok) {
+      console.log("Datos enviados correctamente");
+    } else {
+      console.log("Hubo un error al enviar los datos");
+    }
   } catch (error) {
-      console.error("❌ Error al enviar la solicitud:", error);
+    console.log("Error al enviar la solicitud:", error);
   }
 };
+
+// Código para el menú (sin cambios)
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuContent = document.querySelector(".menu-content");
+
+  menuToggle.addEventListener("click", function () {
+    menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
+  });
+
+  // Cerrar el menú si se hace clic fuera de él
+  document.addEventListener("click", function (event) {
+    if (!menuToggle.contains(event.target) && !menuContent.contains(event.target)) {
+      menuContent.style.display = "none";
+    }
+  });
+});
