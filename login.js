@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
   // Realizamos la solicitud a Google Apps Script para obtener los usuarios
 
-fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")
+fetch("https://script.google.com/macros/s/AKfycbzSu9fAB2XNn8_TvXbR87l9uztYle0ashVqElSgWD2k02DXu4xrEfjfvc6hZgK6MsiDNg/exec")
   .then(response => response.json())
   .then(users => {
     console.log("Usuarios obtenidos:", users); // Depura los usuarios obtenidos
@@ -24,7 +24,7 @@ fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_
     } else {
       document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
     }
-      
+
     })
     .catch(error => {
       console.error("Error al obtener datos:", error);
