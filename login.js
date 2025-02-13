@@ -34,7 +34,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     });
 });
 
-// Guardar usuario en localStorage al loguearse
+// Guardar usuario en localStorage al loguearse NUEVO!!!!!
 const usuarioLogueado = {
   Usuario: "nombre_del_usuario",
   // Otros datos del usuario
