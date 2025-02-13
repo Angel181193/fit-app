@@ -248,80 +248,94 @@ function actualizarListaEjercicios() {
   
       finishWorkoutBtn.style.display = todosMarcados && checkboxes.length > 0 ? "block" : "none";
     }
+
+  });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuContent = document.querySelector(".menu-content");
+
+    menuToggle.addEventListener("click", function () {
+        menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
+    });
   
-    // Finalizar entrenamiento
-    finishButton.addEventListener("click", function () {
+      // Cerrar el menú si se hace clic fuera de él
+      document.addEventListener("click", function (event) {
+          if (!menuToggle.contains(event.target) && !menuContent.contains(event.target)) {
+              menuContent.style.display = "none";
+          }
+      });
+  });
+  
+  // Función para enviar datos a Google Sheets
+  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
+      const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
+  
+      const datos = {
+          user: user,                     // Mantén la misma clave que en Postman
+          fecha_inicio: fecha_inicio,     // Fecha de inicio del ejercicio
+          fecha_fin: fecha_fin,           // Fecha de finalización del ejercicio
+          ejercicio: ejercicio,           // Nombre del ejercicio
+          grupo: grupo || "Sin grupo",    // Evita errores si grupo no está definido
+          series_realizadas: series_realizadas // Número de series realizadas
+      };
+  
+      console.log("Enviando datos:", datos); // Ver qué datos se están enviando
+  
+      try {
+          const response = await fetch(url, {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(datos)
+          });
+  
+          const responseData = await response.text();
+          console.log("Respuesta del servidor:", responseData);
+  
+          if (response.ok) {
+              console.log("✅ Datos enviados correctamente a Google Sheets.");
+          } else {
+              console.log("⚠️ Hubo un error al enviar los datos.");
+          }
+      } catch (error) {
+          console.log("❌ Error al enviar la solicitud:", error);
+      }
+  };
+  
+  // Finalizar entrenamiento
+  finishButton.addEventListener("click", function () {
       let totalTime = (Date.now() - startTime) / 1000;
       let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
   
       if (exerciseTimes.length === 0) {
           summaryMessage += "❌ No completaste ningún ejercicio.";
       } else {
-          // Aquí recorremos cada ejercicio y mostramos su nombre
           exerciseTimes.forEach((time, index) => {
               const ejercicio = ejerciciosPorDia[selectDia.value][index]; // Obtener el ejercicio correspondiente
+  
               summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
+  
+              // Enviar datos del ejercicio a Google Sheets
+              enviarDatos(
+                  "Juan Pérez",  // Puedes hacer esto dinámico si el usuario cambia
+                  new Date().toISOString(), // Fecha de inicio
+                  new Date().toISOString(), // Fecha de fin
+                  ejercicio.nombre,
+                  ejercicio.grupo,  // Asegúrate de que esta propiedad existe
+                  4  // Ajusta el número de series si es necesario
+              );
           });
+  
           summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
       }
   
       alert(summaryMessage);
-      window.location.reload();
-    });
   
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuContent = document.querySelector(".menu-content");
-  
-    menuToggle.addEventListener("click", function () {
-      menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
-    });
-  
-    // Cerrar el menú si se hace clic fuera de él
-    document.addEventListener("click", function (event) {
-      if (!menuToggle.contains(event.target) && !menuContent.contains(event.target)) {
-        menuContent.style.display = "none";
-      }
-    });
-  });
-  
-
-  //scrip insertar resumen dia 
-
-  
-  const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-    const url = 'https://script.google.com/macros/s/AKfycbx0zMYbLTsRhlQtu-D5jCHW0S9bhDnJaxlZSSWJPL9HTeb82eJ6vAw3gPhxC3CvNckw/exec';
-  
-    const datos = {
-        User: user,                   // ✅ Coincide con "User"
-        date_star: fecha_inicio,      // ✅ Coincide con "date_star"
-        date_finish: fecha_fin,       // ✅ Coincide con "date_finish"
-        "Nombre ejercicio": ejercicio, // ✅ Coincide con "Nombre ejercicio"
-        Grupo: grupo,                 // ✅ Coincide con "Grupo"
-        Realizadas: series_realizadas // ✅ Coincide con "Realizadas"
-      };      
-  
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        mode: 'cors',  // 🔹 Habilita CORS
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datos)
-      });
-  
-      const responseData = await response.text();
-      console.log("Respuesta del servidor:", responseData);
-  
-      if (response.ok) {
-        console.log("Datos enviados correctamente");
-      } else {
-        console.log("Hubo un error al enviar los datos");
-      }
-    } catch (error) {
-      console.log("Error al enviar la solicitud:", error);
-    }
-  };
-  
+      // Esperar un poco antes de recargar para asegurar el envío de datos
+      setTimeout(() => {
+          window.location.reload();
+      }, 1500);
+});
