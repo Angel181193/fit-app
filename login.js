@@ -33,3 +33,10 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
       document.getElementById('mensaje').innerText = "Error al conectar con el servidor.";
     });
 });
+
+// Guardar usuario en localStorage al loguearse
+const usuarioLogueado = {
+  Usuario: "nombre_del_usuario",
+  // Otros datos del usuario
+};
+localStorage.setItem('usuarioLogueado', JSON.stringify(usuarioLogueado));
