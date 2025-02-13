@@ -31,25 +31,22 @@
       console.log("Clave:", clave); // Debug
 
       // Hacemos la solicitud a Google Apps Script para obtener los usuarios
-      fetch("https://script.google.com/macros/s/AKfycbzSu9fAB2XNn8_TvXbR87l9uztYle0ashVqElSgWD2k02DXu4xrEfjfvc6hZgK6MsiDNg/exec")
-        .then(response => response.json())
-        .then(users => {
-          // Buscamos al usuario con las credenciales ingresadas
-          const validUser = users.find(user =>
-            user.Usuario.trim().toLowerCase() === usuario.toLowerCase() && user.Clave.trim() === clave
-          );
+      fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")
+  .then(response => response.json())
+  .then(users => {
+    console.log("Usuarios obtenidos:", users); // Depura los usuarios obtenidos
+    const validUser = users.find(user =>
+      user.Usuario.trim().toLowerCase() === usuario.toLowerCase() && user.Clave.trim() === clave
+    );
 
-          if (validUser) {
-            // Si encontramos al usuario válido, guardamos el usuario en localStorage
-            localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
-
-            // Redirigimos a la página de ejercicios
-            window.location.href = "index.html";
-          } else {
-            // Si las credenciales son incorrectas
-            document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
-          }
-        })
+    if (validUser) {
+      // Si encontramos al usuario válido
+      localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
+      window.location.href = "index.html";
+    } else {
+      document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
+    }
+  })
         .catch(error => {
           console.error("Error al obtener usuarios:", error);
           document.getElementById('mensaje').textContent = "Error al conectar con el servidor.";
