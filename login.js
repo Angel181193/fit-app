@@ -8,27 +8,29 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   // Mostrar mensaje de "verificando"
   document.getElementById('mensaje').innerText = "Verificando...";
 
-  // Realizamos la solicitud a Google Apps Script para obtener los usuariosff
+  // Realizamos la solicitud a Google Apps Script para obtener los usuarios
+  fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")  // Asegúrate de que esta URL esté correcta
+    .then(response => response.json())
+    .then(users => {
+      // Buscamos al usuario válido
+      const validUser = users.find(user =>
+        user.Usuario.trim().toLowerCase() === usuarioInput.toLowerCase() &&
+        user.Clave.trim() === claveInput
+      );
 
-  fetch('https://script.google.com/macros/s/AKfycbyF4mnCsMpXSwxFfMyHnjI6axYnPwlaCp6wa8QUOoLGJKUinwlVQzM0hRfkln2HVNhqBA/exec')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();  // Intenta parsear la respuesta como JSON
-  })
-  .then(data => {
-    console.log(data);  // Aquí obtienes el JSON
-    if (data.status === 'success') {
-      // Haz algo con la respuesta exitosa
-      console.log('Usuario recibido:', data.message);
-    } else {
-      // Maneja el error en el frontend
-      console.log('Error:', data.message);
-    }
-  })
+      // Si encontramos un usuario válido, redirigimos
+      if (validUser) {
+        // Guardamos el usuario logueado en localStorage solo si es válido
+        localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
+        window.location.href = "index.html";  // Redirige a la app principal
+      } else {
+        // Si el usuario o la clave no son correctos
+        document.getElementById('mensaje').innerText = "Usuario o clave incorrectos.";
+      }
+    })
     .catch(error => {
       console.error("Error al obtener datos:", error);
       document.getElementById('mensaje').innerText = "Error al conectar con el servidor.";
     });
 });
+
