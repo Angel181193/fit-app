@@ -40,7 +40,7 @@ const ejerciciosPorDia = {
     { "nombre": "🏋️Press inclinado con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Press plano con barra", "grupo": "Pecho", "series": 5, "realizadas": 0 },
     { "nombre": "🏋️Prees Militar", "grupo": "Hombro", "series": 8, "realizadas": 0 },
-    { "nombre": "🏋️alón al pecho polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
+    { "nombre": "🏋️Jalón al pecho polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
     { "nombre": "🏋️Jalón espalda polea", "grupo": "Espalda", "series": 8, "realizadas": 0 },
     { "nombre": "🏃Correr", "grupo": "HIT", "series": 10, "realizadas": 0 },
   ],
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   
-  // Función para finalizar entrenamiento y mostrar resumen
+ // Función para finalizar entrenamiento y mostrar resumen
 finishButton.addEventListener("click", function () {
   let totalTime = (Date.now() - startTime) / 1000;
   let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
