@@ -9,25 +9,22 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   document.getElementById('mensaje').innerText = "Verificando...";
 
   // Realizamos la solicitud a Google Apps Script para obtener los usuarios
-  fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")  // Asegúrate de que esta URL esté correcta
-    .then(response => response.json())
-    .then(users => {
-      // Buscamos al usuario válido
-      const validUser = users.find(user =>
-        user.Usuario.trim().toLowerCase() === usuarioInput.toLowerCase() &&
-        user.Clave.trim() === claveInput
-      );
 
-      // Si encontramos un usuario válido, redirigimos
-      if (validUser) {
-        // Guardamos el usuario logueado en localStorage solo si es válido
-        localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
-        console.log("Usuario guardado en localStorage", validUser); // Verifica que el usuario está guardado
-        window.location.href = "index.html";  // Redirige a la app principal
-      } else {
-        // Si el usuario o la clave no son correctos
-        document.getElementById('mensaje').innerText = "Usuario o clave incorrectos.";
-      }      
+fetch("https://script.google.com/macros/s/AKfycbzEA8yYF6rqd61f5DEl5rLZgrx-LVEU7_ywZao5Clfwt9rDi4FAWLX99aYBveJwtE3DVg/exec")
+  .then(response => response.json())
+  .then(users => {
+    console.log("Usuarios obtenidos:", users); // Depura los usuarios obtenidos
+    const validUser = users.find(user =>
+      user.Usuario.trim().toLowerCase() === usuario.toLowerCase() && user.Clave.trim() === clave
+    );
+    if (validUser) {
+      // Si encontramos al usuario válido
+      localStorage.setItem('usuarioLogueado', JSON.stringify(validUser));
+      window.location.href = "index.html";
+    } else {
+      document.getElementById('mensaje').textContent = "Credenciales incorrectas. Intenta de nuevo.";
+    }
+      
     })
     .catch(error => {
       console.error("Error al obtener datos:", error);
