@@ -76,12 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // Escuchar cambios en el select y actualizar la lista de ejercicios //HASTA AQUI
 selectDia.addEventListener("change", () => actualizarListaEjercicios());
 
-
-    // Actualizar la lista de ejercicios con el día seleccionado
-    selectDia.addEventListener("change", () => actualizarListaEjercicios());
-    actualizarListaEjercicios(); // Mostrar los ejercicios del primer día seleccionado
-  }).catch(error => {
-    console.log("Error al obtener los ejercicios:", error);
   });
 });
 
