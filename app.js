@@ -25,6 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+// CAMBIOSObtener el día actual en español
+const obtenerDiaActual = () => {
+  const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const hoy = new Date().getDay(); // Devuelve 0 (Domingo) a 6 (Sábado)
+  return diasSemana[hoy];
+};
+
 // CAMBIOS Llenar el select con los días de los ejercicios del usuario
 selectDia.innerHTML = ""; // 🔥 Limpiar el select antes de añadir días dinámicamente
 
@@ -35,10 +42,15 @@ for (const dia in ejerciciosPorDia) {
   selectDia.appendChild(option);
 }
 
-// CAMBIOS Escuchar cambios en el select y actualizar lista
+// CAMBIOS Seleccionar automáticamente el día actual si existe en la lista
+const diaActual = obtenerDiaActual();
+if (ejerciciosPorDia[diaActual]) {
+  selectDia.value = diaActual;
+}
+
+//CAMBIOS  Escuchar cambios en el select y actualizar lista
 selectDia.addEventListener("change", () => actualizarListaEjercicios());
 actualizarListaEjercicios();
-
 
     // Actualizar la lista de ejercicios con el día seleccionado
     selectDia.addEventListener("change", () => actualizarListaEjercicios());
