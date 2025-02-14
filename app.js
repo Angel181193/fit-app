@@ -25,45 +25,32 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-// Obtener referencia al select
-const selectDia = document.getElementById("select-dia");
-
-// Función para obtener el día actual en español
+// CAMBIOSObtener el día actual en español
 const obtenerDiaActual = () => {
   const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
   const hoy = new Date().getDay(); // Devuelve 0 (Domingo) a 6 (Sábado)
   return diasSemana[hoy];
 };
 
-// Función para actualizar el select con los días disponibles
-const actualizarSelectDias = () => {
-  selectDia.innerHTML = ""; // 🔥 Limpiar el select antes de añadir días dinámicamente
+// CAMBIOS Llenar el select con los días de los ejercicios del usuario
+selectDia.innerHTML = ""; // 🔥 Limpiar el select antes de añadir días dinámicamente
 
-  for (const dia in ejerciciosPorDia) {
-    const option = document.createElement("option");
-    option.value = dia;
-    option.textContent = dia.charAt(0).toUpperCase() + dia.slice(1); // Primera letra mayúscula
-    selectDia.appendChild(option);
-  }
+for (const dia in ejerciciosPorDia) {
+  const option = document.createElement("option");
+  option.value = dia;
+  option.textContent = dia;
+  selectDia.appendChild(option);
+}
 
-  // Seleccionar automáticamente el día actual si existe en la lista
-  const diaActual = obtenerDiaActual();
-  if (ejerciciosPorDia[diaActual]) {
-    selectDia.value = diaActual;
-  } else {
-    selectDia.selectedIndex = 0; // Si el día actual no tiene ejercicios, seleccionar el primero disponible
-  }
+// CAMBIOS Seleccionar automáticamente el día actual si existe en la lista
+const diaActual = obtenerDiaActual();
+if (ejerciciosPorDia[diaActual]) {
+  selectDia.value = diaActual;
+}
 
-  actualizarListaEjercicios(); // Refrescar la lista de ejercicios con el día seleccionado
-};
-
-// Llamar a la función después de cargar los ejercicios
-document.addEventListener("DOMContentLoaded", function () {
-  obtenerEjercicios(usuarioLogueado.Usuario).then(() => {
-    actualizarSelectDias(); // Cargar el select con los días correctos
-  });
-});
-
+//CAMBIOS  Escuchar cambios en el select y actualizar lista
+selectDia.addEventListener("change", () => actualizarListaEjercicios());
+actualizarListaEjercicios();
 
     // Actualizar la lista de ejercicios con el día seleccionado
     selectDia.addEventListener("change", () => actualizarListaEjercicios());
