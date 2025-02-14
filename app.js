@@ -25,13 +25,20 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Llenar el select con los días
-    for (const dia in ejerciciosPorDia) {
-      const option = document.createElement("option");
-      option.value = dia;
-      option.textContent = dia;
-      selectDia.appendChild(option);
-    }
+// CAMBIOS Llenar el select con los días de los ejercicios del usuario
+selectDia.innerHTML = ""; // 🔥 Limpiar el select antes de añadir días dinámicamente
+
+for (const dia in ejerciciosPorDia) {
+  const option = document.createElement("option");
+  option.value = dia;
+  option.textContent = dia;
+  selectDia.appendChild(option);
+}
+
+// CAMBIOS Escuchar cambios en el select y actualizar lista
+selectDia.addEventListener("change", () => actualizarListaEjercicios());
+actualizarListaEjercicios();
+
 
     // Actualizar la lista de ejercicios con el día seleccionado
     selectDia.addEventListener("change", () => actualizarListaEjercicios());
