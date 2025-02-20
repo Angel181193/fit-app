@@ -268,31 +268,33 @@ function actualizarListaEjercicios() {
   
 
 // Finalizar entrenamiento y enviar resumen a Google Sheets
-finishButton.addEventListener("click", async function () {
-  let totalTime = (Date.now() - startTime) / 1000;
-  let fechaInicio = new Date(startTime).toISOString();
-  let fechaFin = new Date().toISOString();
-  let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+finishButton.addEventListener("click", function () {
+  console.log("Botón de finalizar clickeado"); // <-- Depuración
 
+  let totalTime = (Date.now() - startTime) / 1000;
+  let fecha_inicio = new Date(startTime).toISOString().split("T")[0];
+  let fecha_fin = new Date().toISOString().split("T")[0];
+  let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
+  
   if (exerciseTimes.length === 0) {
       summaryMessage += "❌ No completaste ningún ejercicio.";
   } else {
-      // Recorrer cada ejercicio y enviarlo a Google Sheets
-      for (let i = 0; i < exerciseTimes.length; i++) {
-          let ejercicio = ejerciciosPorDia[selectDia.value][i]; // Obtener ejercicio correspondiente
-          let tiempo = exerciseTimes[i].toFixed(2);
+      exerciseTimes.forEach((time, index) => {
+          const ejercicio = ejerciciosPorDia[selectDia.value][index];
+          summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
 
-          summaryMessage += `${ejercicio.nombre}: ${tiempo} segundos\n`;
-
-          // Enviar datos a Google Sheets
-          await enviarDatos(usuario, fechaInicio, fechaFin, ejercicio.nombre, ejercicio.grupo, tiempo);
-      }
-
+          // Enviar cada ejercicio a Google Sheets
+          enviarDatos(usuario, fecha_inicio, fecha_fin, ejercicio.nombre, ejercicio.grupo, time.toFixed(2));
+      });
+      
       summaryMessage += `\n⏳ Tiempo total: ${totalTime.toFixed(2)} segundos`;
   }
 
   alert(summaryMessage);
-  window.location.reload();
+  console.log("Resumen mostrado, recargando...");
+  setTimeout(() => {
+      window.location.reload();
+  }, 1000);
 });
 
 // Función para enviar datos a Google Sheets
