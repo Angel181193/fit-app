@@ -271,8 +271,8 @@ function actualizarListaEjercicios() {
     finishButton.addEventListener("click", function () {
       console.log("Botón de finalizar clickeado"); // Debug
   
-      const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { Nombre: "Desconocido" };
-      const usuario = usuarioLogueado.Nombre; // Extraer nombre del usuario
+      const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { Usuario: "Desconocido" };
+      const usuario = usuarioLogueado.Usuario; // Extraer nombre del usuario
       let totalTime = (Date.now() - startTime) / 1000;
       let fecha_inicio = new Date(startTime).toISOString();
       let fecha_fin = new Date().toISOString();
@@ -332,15 +332,15 @@ function actualizarListaEjercicios() {
     const url = 'https://script.google.com/macros/s/AKfycbxHJr_0GrSyShz0MmSTIWFL0ofaNwY3x40yj6gazkIvBzqQ3daqSG01lFz292opemUupA/exec';
 
     const datos = {
-        user: user,
-        fecha_inicio: fecha_inicio,
-        fecha_fin: fecha_fin,
-        ejercicio: ejercicio,
-        grupo: grupo,
-        series_realizadas: series_realizadas
+        user: user.trim(), // Asegurar que no tenga espacios en blanco
+        fecha_inicio: new Date(fecha_inicio).toISOString(), // Normalizar formato de fecha
+        fecha_fin: new Date(fecha_fin).toISOString(),
+        ejercicio: ejercicio.trim(),
+        grupo: grupo.trim(),
+        series_realizadas: Number(series_realizadas) // Convertir a número si es necesario
     };
 
-    console.log("Enviando datos a Google Sheets:", datos); // DEPURACIÓN
+    console.log("📌 Enviando datos a Google Sheets:", datos); // Para depuración
 
     try {
         const response = await fetch(url, {
@@ -357,10 +357,8 @@ function actualizarListaEjercicios() {
         }
 
         const data = await response.json();
-        console.log("Datos enviados correctamente:", data);
+        console.log("✅ Datos enviados correctamente:", data);
     } catch (error) {
-        console.error("Error al enviar los datos:", error);
+        console.error("❌ Error al enviar los datos:", error);
     }
 };
-
-  
