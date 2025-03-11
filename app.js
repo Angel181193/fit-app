@@ -269,10 +269,12 @@ function actualizarListaEjercicios() {
     
     
     finishButton.addEventListener("click", function () {
-      console.log("Botón de finalizar clickeado"); // Depuración
+      console.log("Botón de finalizar clickeado"); // Debug
   
+      const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { nombre: "Desconocido" };
+      const usuario = usuarioLogueado.nombre; // Extraer nombre del usuario
       let totalTime = (Date.now() - startTime) / 1000;
-      let fecha_inicio = new Date(startTime).toISOString(); // Formato correcto
+      let fecha_inicio = new Date(startTime).toISOString();
       let fecha_fin = new Date().toISOString();
       let summaryMessage = `🏋️‍♂️ Resumen del entrenamiento:\n\n`;
   
@@ -284,14 +286,14 @@ function actualizarListaEjercicios() {
   
               summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
   
-              // Llamar a la función para insertar en Google Sheets
+              // Enviar los datos a Google Sheets
               enviarDatos(
-                  usuario,  // Usuario registrado
+                  usuario,  
                   fecha_inicio,
                   fecha_fin,
                   ejercicio.nombre,
                   ejercicio.grupo,
-                  time.toFixed(2) // Segundos como series realizadas
+                  time.toFixed(2)
               );
           });
   
@@ -299,10 +301,12 @@ function actualizarListaEjercicios() {
       }
   
       alert(summaryMessage);
+  
       setTimeout(() => {
           window.location.reload();
       }, 1500);
   });
+  
   
   });
   document.addEventListener("DOMContentLoaded", function () {
