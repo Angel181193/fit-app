@@ -62,7 +62,7 @@ actualizarListaEjercicios();
 
 // Función para obtener los ejercicios
 const obtenerEjercicios = async (usuario) => {
-  const url = 'https://script.google.com/macros/s/AKfycbx8YqVcGkcqz2XySnfhMqHo8ANWYhDVa3HfNYPmLzgCtFo7dtx5g3965LXlVviTqYZ52g/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxHJr_0GrSyShz0MmSTIWFL0ofaNwY3x40yj6gazkIvBzqQ3daqSG01lFz292opemUupA/exec';
 
   try {
     const response = await fetch(url + "?user=" + usuario);
@@ -308,7 +308,7 @@ function actualizarListaEjercicios() {
   //scrip insertar resumen dia 
 
   const enviarDatos = async (user, fecha_inicio, fecha_fin, ejercicio, grupo, series_realizadas) => {
-    const url = 'https://script.google.com/macros/s/AKfycbxHJr_0GrSyShz0MmSTIWFL0ofaNwY3x40yj6gazkIvBzqQ3daqSG01lFz292opemUupA/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbx8YqVcGkcqz2XySnfhMqHo8ANWYhDVa3HfNYPmLzgCtFo7dtx5g3965LXlVviTqYZ52g/exec';
   
     const datos = {
       User: user,
