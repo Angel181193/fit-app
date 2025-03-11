@@ -272,7 +272,7 @@ function actualizarListaEjercicios() {
       console.log("Botón de finalizar clickeado"); // Debug
   
       const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { nombre: "Desconocido" };
-      const usuario = usuarioLogueado.nombre; // Extraer nombre del usuario
+      const usuario = usuarioLogueado.Nombre; // Extraer nombre del usuario
       let totalTime = (Date.now() - startTime) / 1000;
       let fecha_inicio = new Date(startTime).toISOString();
       let fecha_fin = new Date().toISOString();
