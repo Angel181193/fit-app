@@ -62,7 +62,7 @@ actualizarListaEjercicios();
 
 // Función para obtener los ejercicios
 const obtenerEjercicios = async (usuario) => {
-  const url = 'https://script.google.com/macros/s/AKfycbxHJr_0GrSyShz0MmSTIWFL0ofaNwY3x40yj6gazkIvBzqQ3daqSG01lFz292opemUupA/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbx8YqVcGkcqz2XySnfhMqHo8ANWYhDVa3HfNYPmLzgCtFo7dtx5g3965LXlVviTqYZ52g/exec';
 
   try {
     const response = await fetch(url + "?user=" + usuario);
