@@ -284,8 +284,8 @@ function actualizarListaEjercicios() {
           exerciseTimes.forEach((time, index) => {
               const ejercicio = ejerciciosPorDia[selectDia.value][index];
   
-              // Verifica que ejercicio.series esté correctamente definido
-              let series = Number(ejercicio.series) || 0;  // Asegura que series tenga un valor numérico
+              // Verifica que ejercicio.Realizadas esté correctamente definido
+              let series = Number(ejercicio.Realizadas) || 0;  // Asegura que series tenga un valor numérico
               console.log("Ejercicio: ", ejercicio.nombre, "Series: ", series);  // Depuración
   
               summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
