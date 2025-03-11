@@ -284,6 +284,12 @@ function actualizarListaEjercicios() {
           exerciseTimes.forEach((time, index) => {
               const ejercicio = ejerciciosPorDia[selectDia.value][index];
   
+              // Verifica que ejercicio.series tiene un valor
+              console.log("Ejercicio: ", ejercicio.nombre, "Series: ", ejercicio.series);  // Depuración
+  
+              // Asegura que series tenga un valor válido (número)
+              let series = Number(ejercicio.series) || 0;  // Si no es número, asigna 0
+  
               summaryMessage += `${ejercicio.nombre}: ${time.toFixed(2)} segundos\n`;
   
               // Enviar los datos a Google Sheets
@@ -293,7 +299,7 @@ function actualizarListaEjercicios() {
                   fecha_fin,
                   ejercicio.nombre,
                   ejercicio.grupo,
-                  ejercicio.series
+                  series  // Usar la variable `series` en lugar de `ejercicio.series`
               );
           });
   
@@ -306,7 +312,6 @@ function actualizarListaEjercicios() {
           window.location.reload();
       }, 1500);
   });
-  
   
   });
   document.addEventListener("DOMContentLoaded", function () {
