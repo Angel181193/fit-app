@@ -271,7 +271,7 @@ function actualizarListaEjercicios() {
     finishButton.addEventListener("click", function () {
       console.log("Botón de finalizar clickeado"); // Debug
   
-      const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { nombre: "Desconocido" };
+      const usuarioLogueado = JSON.parse(localStorage.getItem('usuarioLogueado')) || { Nombre: "Desconocido" };
       const usuario = usuarioLogueado.Nombre; // Extraer nombre del usuario
       let totalTime = (Date.now() - startTime) / 1000;
       let fecha_inicio = new Date(startTime).toISOString();
