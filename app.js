@@ -293,7 +293,7 @@ function actualizarListaEjercicios() {
                   fecha_fin,
                   ejercicio.nombre,
                   ejercicio.grupo,
-                  realizadas
+                  ejercicio.series
               );
           });
   
